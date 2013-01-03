@@ -1,0 +1,24 @@
+<manifest>
+   <uses-permission />
+   <permission />
+   <uses-sdk />
+   <supports-screens />  
+   <compatible-screens />
+
+   <application>
+      <activity>
+         <intent-filter>...</intent-filter>
+         <meta-data />
+      </activity>
+
+      <service>
+         <intent-filter>...</intent-filter>
+         <meta-data/>
+      </service>
+
+      <receiver>
+         <intent-filter>...</intent-filter>
+         <meta-data />
+      </receiver>
+   </application>
+</manifest>

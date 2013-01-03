@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest>
+   ...
+
+   <application>
+      <activity android:name="math.elearning.TodoList">
+         <intent-filter>
+            <action android:name="android.intent.action.SEARCH" />
+         </intent-filter>
+      </activity>
+
+      <receiver android:name="math.elearning.CallLogObserver" android:enabled="true">
+         <intent-filter>
+            <action android:name="android.intent.action.PHONE_STATE" />
+         </intent-filter>
+      </receiver>
+
+      ...
+   </application>
+</manifest>
