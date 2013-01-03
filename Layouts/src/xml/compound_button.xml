@@ -1,0 +1,6 @@
+ <CompoundButton
+     android:layout_height="wrap_content"
+     android:layout_width="wrap_content"
+     android:text="Toogle Me!"
+     android:button="@drawable/ic_launcher"
+     android:checked="true" />

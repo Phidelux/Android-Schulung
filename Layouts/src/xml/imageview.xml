@@ -1,0 +1,7 @@
+<ImageView
+   android:layout_width="wrap_content"
+   android:layout_height="wrap_content"
+   android:src="@drawable/ic_launcher" 
+   android:maxHeight="7dp"
+   android:maxWidth="7dp"
+   android:tint="#345678" />

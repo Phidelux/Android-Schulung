@@ -1,0 +1,6 @@
+<ToggleButton 
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textOn="Sound on"
+    android:textOff="Sound off"
+    android:onClick="onToggled"/>

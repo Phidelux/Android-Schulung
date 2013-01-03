@@ -1,0 +1,170 @@
+\title{Android -- Eine Einführung}
+\subtitle{Layouts, Views \& Adapter}
+\author[A. Wilhelm]{Andreas Wilhelm}
+\institute[IfI -- Uni Göttingen]{
+   Institut für Informatik\\ Georg-August-Universität Göttingen
+}
+\titlegraphic{}
+%\date{\today}
+\date{www.avedo.net}
+
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+\section[Contents]{}
+\begin{frame}
+	\frametitle{Contents}
+	\tableofcontents[onlyparts]
+\end{frame}
+
+\part{Layouts}
+\frame{\partpage}
+\begin{frame}
+	\frametitle{Contents}
+	\tableofcontents[]
+\end{frame}
+
+\section{Überblick}
+\begin{frame}
+   \frametitle{Allgemeines}
+   \begin{itemize}
+      \item Oberflächen für Aktivitäten, Menüs, Dialogen und Widgets
+      \item Grundelemente Views und ViewGroups (Layouts \& AdapterViews)
+      \item Deklaration im XML-Format
+      \item Formatierung eines Elements über Attribute
+      \item Alternativ View-Objekte während der Laufzeit im Quellcode 
+         erzeugen und ändern
+      \item Weitestgehend einheitliche Namensgebung für XML-Attribute 
+         und Objekt-Methoden
+   \end{itemize}
+
+   \begin{alertblock}{XML-Layouts}
+      Deklaration von Layouts in XML verschlankt den Code, 
+      ermöglicht Unterstützung verschiedener Oberflächen, Sprachen 
+      und Auflösungen und erleichtert den Debugging-Prozess.
+   \end{alertblock}
+\end{frame}
+
+\begin{frame}
+   \frametitle{Deklaration}
+   \begin{itemize}
+      \item Erstellung von Layouts erinnert an HTML-Code
+      \item Jedes layout darf nur ein Wurzelelement enthalten 
+         (View, ViewGroup, Layout, Merge)
+      \item Darunter beliebig verschachtelte Layout-Hierarchie
+      \item Speichern von Layouts unter \emph{/res/layouts}
+      \item Zugriff im Quellcode über automatisch generierte Klasse \emph{R}
+      \item Zugriff in anderen Layouts über \emph{@[package:]layout/filename}
+   \end{itemize}
+\end{frame}
+
+\section{ViewGroups}
+\begin{frame}
+   \frametitle{Allgemeines}
+   \begin{itemize}
+      \item Struktur-Elemente, die andere Views anordnen
+      \item LinearLayout, das FrameLayout oder das RelativeLayout
+      \item Weitere ViewGroups ohne Kindelemente (Bsp: AdapterView)
+      \item Basis-Attribute ID (optional), sowie Breite und Höhe
+   \end{itemize}
+
+   \begin{alertblock}{Android-IDs}
+      Eindeutige ID eines Layout-Elements wird über \emph{android:id} 
+      in der Form \emph{@+id/name} deklariert. + signalisiert dabei, dass es sich 
+      um eine neue ID handelt. Diese ID kann im Quellcode mit \emph{R.id.name} 
+      referenziert werden.\\
+
+      Alternativ kann eine ID als Resource deklariert und mit \emph{@id/name} 
+      referenziert werden. Die Deklaration einer solchen Resource wird in XML vorgenommen 
+      und unter einem beliebigen Dateinamen unter \emph{/res/values} abgelegt.\\
+
+      \lstinputlisting[
+         backgroundcolor=\color{boxcol},language=xml,
+         caption=Deklaration von IDs,label={lst:id_resource.xml}]{src/xml/id_resource.xml}
+   \end{alertblock}
+\end{frame}
+
+\begin{frame}
+   \frametitle{Bemaßungen}
+   \begin{itemize}
+      \item Bemaßungen eines ViewGroups mit den Attributen \emph{android:layout\_width} 
+			und \emph{android:layout\_height} entweder explizit oder implizit
+      \item Explizite Angabe erfolgt dabei als Wert oder als Resource
+      \item Implizite über die Schlüsselwörter \emph{fill\_parent}, 
+         \emph{match\_parent} oder \emph{wrap\_content}
+   \end{itemize}
+
+   Zur Bemaßungen können verschiedene Einheiten (px, dp, sp, pt, in, mm) 
+   oder Schlüsselwörter verwenden.\\
+
+	\begin{attrDesc}{+p{3cm}|^p{7cm}}
+		Schlüsselwort & Beschreibung\\
+		\hline
+      \emph{match\_parent} & Weist aktuellem Objekt die Größe des Eltern-Elements zu 
+         (löst \emph{fill\_parent} ab)\\
+      \emph{fill\_parent} & Weist aktuellen Objekt die Größe des Eltern-Elements zu\\
+      \emph{wrap\_content} & Sorgt für Anpassung der Größe, sodass Inhalt umschlossen wird\\
+  	\end{attrDesc}
+
+   Alternativ kann man auch eine Resource im Quellcode über die Klasse \emph{R} 
+   oder in einer XMl-Datei mit dem Schlüssel \emph{@[package:]dimen/dimension\_name} 
+   referenziert.\\
+
+   \lstinputlisting[
+      backgroundcolor=\color{boxcol},language=xml,
+      caption=Deklaration von Dimensionen,label={lst:dimen.xml}]{src/xml/dimen.xml}
+\end{frame}
+
+\section{View}
+\begin{frame}
+   \frametitle{Allgemeines}
+   \begin{itemize}
+      \item Allein stehendes Element einer grafischen Oberfläche
+      \item Nimmt rechteckige Fläche des Bildschirms ein
+      \item Kümmert sich um die Ausgabe und das Verarbeiten von Ereignissen
+      \item Textfelder, Buttons und Eingabefelder, wie beispielsweise \emph{TextView}
+      \item Deklaration per XML oder im Quellcode
+      \item Verwaltung der Basis-Attribute, wie bei ViewGroups
+   \end{itemize}
+\end{frame}
+
+\section{RequestFocus}
+\begin{frame}
+   \frametitle{RequestFocus}
+   \begin{itemize}
+      \item Gibt View bzw. ViewGroup direkt bei Initialisierung den Fokus
+      \item XML-Deklaration als leeres Element \emph{\textless{}requestFocus\textgreater}
+      \item Zuweisung eines solchen Elements nur einmal pro Datei
+   \end{itemize}
+\end{frame}
+
+\section{Include}
+\begin{frame}
+   \frametitle{Include}
+   \begin{itemize}
+      \item Verbinden bereits existierender Layouts
+      \item Element \emph{\textless{}include\textgreater}
+      \item Einziges eigenes Attribut Name des einzubinden Layouts
+      \item Optional eine ID, sowie Breite und Höhe des Layouts
+      \item Werte überschreiben die Werte des Wurzelknotens im eingebundenen Layout
+      \item Änderungen an den Bemaßungen mit \emph{android:layout\_width} und 
+      	\emph{android:layout\_height} nur für beide Attribute möglich
+   \end{itemize}
+
+   \begin{alertblock}{ViewStub}
+      Alternativ kann anstatt des \emph{\textless{}include\textgreater}-Elements 
+      auch ein \emph{ViewStub} verwendet werden.
+   \end{alertblock}
+\end{frame}
+
+\section{Merge}
+\begin{frame}
+   \frametitle{Merge}
+   \begin{itemize}
+      \item Wurzelelement um Layouts zu verbinden
+      \item Sinnvoll wenn Layouts mit \emph{\textless{}include\textgreater} 
+         verbunden werden sollen
+      \item Flacherer und dadurch einfacherer Aufbau der View-Hierarchie
+   \end{itemize}
+\end{frame}

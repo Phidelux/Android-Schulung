@@ -1,0 +1,7 @@
+<EditText
+   android:layout_width="wrap_content"
+   android:layout_height="wrap_content"
+   android:hint="Your Password"
+   android:textColorHint="#454545"
+   android:password="true"
+   android:maxLength="10" />

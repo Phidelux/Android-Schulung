@@ -1,0 +1,21 @@
+<RadioGroup 
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+   android:layout_width="match_parent"
+   android:layout_height="match_parent" >
+   <RadioButton 
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Diablo"
+      android:onClick="onRadio"/>
+   <RadioButton 
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="CounterStrike"
+      android:onClick="onRadio"/>
+   <RadioButton 
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="World of Warcraft"
+      android:onClick="onRadio"/>
+</RadioGroup>

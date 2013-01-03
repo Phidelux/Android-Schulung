@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Hello Views</string>
+
+    ...
+
+    <string-array name="games_array">
+        <item>Diablo</item>
+        <item>WOW</item>
+        <item>CounterStrike</item>
+    </string-array>
+</resources>

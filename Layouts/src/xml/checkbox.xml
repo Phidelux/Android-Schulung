@@ -1,0 +1,18 @@
+<LinearLayout 
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+	<CheckBox 
+		android:id="@+id/cbxDiablo"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+      android:text="Diablo III"
+      android:onClick="onDiabloChecked"/>
+   <CheckBox 
+   	android:id="@+id/cbxWow"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="WOW"
+      android:onClick="onWowChecked"/>
+</LinearLayout>
