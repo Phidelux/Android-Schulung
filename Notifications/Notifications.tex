@@ -1,0 +1,389 @@
+\title{Android -- Eine Einführung}
+\subtitle{Toasts \& Notifications}
+\author[A. Wilhelm]{Andreas Wilhelm}
+\institute[IfI -- Uni Göttingen]{
+   Institut für Informatik\\ Georg-August-Universität Göttingen
+}
+\titlegraphic{}
+%\date{\today}
+\date{www.avedo.net}
+
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+\section[Contents]{}
+\begin{frame}
+	\frametitle{Contents}
+	\tableofcontents[onlyparts]
+\end{frame}
+
+\part{Toasts}
+\frame{\partpage}
+\begin{frame}
+	\frametitle{Contents}
+	\tableofcontents[]
+\end{frame}
+
+\section{Überblick}
+\begin{frame}
+   \frametitle{Überblick}
+   \begin{itemize}
+      \item Nachrichten bezüglich gestarteten, laufenden oder beendeten 
+         Operationen
+      \item Kleine Anzeige, die nur benötigten Platz einnimmt
+      \item Darunterliegende Oberfläche weiterhin nutzbar
+      \item Keine Interaktion mit Toasts
+   \end{itemize}
+
+   \lstinputlisting[
+      caption=Ein erster Toast,
+      label={lst:FirstToast.java}]{src/java/FirstToast.java}
+\end{frame}
+
+\section{Anpassung des Layouts}
+\begin{frame}
+   \frametitle{Positionierung}
+   \begin{itemize}
+      \item Normalerweise Anzeige zentriert am unteren Bildschirmrand
+      \item Änderung der Position mit \emph{setGravity()}
+      \item Erstes Argument Positionierung auf Bildschirm
+      \item Zweites und drittes Verschiebung
+   \end{itemize}
+
+   \lstinputlisting[
+      caption=Ein zentierter Toast,
+      label={lst:GravityToast.java}]{src/java/GravityToast.java}
+\end{frame}
+
+\begin{frame}
+   \frametitle{Eigene Layouts}
+   \begin{itemize}
+      \item Eigene Layouts mit \emph{setView()} zuweisen
+      \item Dabei sollte Hintergund mit Shapes deklariert werden
+   \end{itemize}
+
+   \lstinputlisting[
+      language=xml,caption=Das Toast layout,
+      label={lst:toast_layout.xml}]{src/xml/toast_layout.xml}
+\end{frame}
+
+\begin{frame}
+   \frametitle{Shapes}
+   \lstinputlisting[
+      language=xml,caption=Der Toast Hintergrund,
+      label={lst:toast_shape.xml}]{src/xml/toast_shape.xml}
+\end{frame}
+
+\begin{frame}
+   \frametitle{Nutzung eigenes Layouts}
+   \begin{itemize}
+      \item Laden des Layouts mit LayoutInflater
+      \item Instanzierung eines Toasts mit Konstruktor (nicht \emph{makeText})
+      \item Zuweisung des Layouts mit \emph{setView()}
+   \end{itemize}
+
+   \lstinputlisting[
+      caption=Ein angepasster Toast,
+      label={lst:CustomToast.java}]{src/java/CustomToast.java}
+\end{frame}
+
+\begin{frame}
+   \frametitle{Screenshot}
+   \begin{figure}[h!]
+     \centering
+     \includegraphics[width=0.7\textwidth]{pictures/custom_toast.ps}
+     \caption{
+        Ein eigener Toast
+     }
+     \label{fig:custom_toast}
+   \end{figure}
+\end{frame}
+
+\begin{frame}
+   \frametitle{Anmerkung}
+   \begin{alertblock}{Toast Konstruktor}
+		Es ist unbedingt darauf zu achten, dass der öffentliche Konstruktor der Klasse 
+		Toast nur dann verwendet wird, wenn ein eigenes Layout dem Toast zugewiesen werden 
+		soll. In allen anderen Fällen sollte die statische Methode \emph{makeText()} 
+		verwendet werden.
+   \end{alertblock}
+\end{frame}
+
+\part{Notifications}
+\frame{\partpage}
+\begin{frame}
+	\frametitle{Contents}
+	\tableofcontents[]
+\end{frame}
+
+\section{Überblick}
+\begin{frame}
+   \frametitle{Allgemeines}
+   \begin{itemize}
+      \item Nachrichten in einer von der Applikation unabhängigen Umgebung
+      \item Anzeige in Bar am oberen Bildschirmrand (NotificationBar) 
+      \item Zuerst nur Anzeige eines Icons
+      \item Anzeige weiterer Informationen in Notification-DropDown
+      \item Erstellen von Notifications mit \emph{Notification.Builder}
+      \item Bestandteil der API seit Android Version 3.0
+      \item Verfügbar über Android Support Library
+      \item Einführung weiterer Ansichten in Android 4.1
+   \end{itemize}
+
+   \begin{alertblock}{NotificationCompat.Builder}
+      \emph{Notification.Builder} wurde erst in Android 3.0 (API-Version 11) eingeführt. 
+      Verwendung nur mit minimal unterstützter API-Version der Applikation 11 oder höher. 
+      Unterstützung älterer API-Versionen mit NotificationCompat.Builder, der Teil 
+      der Android Support Library ist.
+   \end{alertblock}
+\end{frame}
+
+\begin{frame}
+   \frametitle{Android Support Library}
+   \begin{alertblock}{Android Support Library}
+		Die Android Support Library enthält Bibliotheken, die in älteren API-Versionen 
+		noch nicht zur Verfügung standen oder Werzeuge bereitstellen, die nicht Teil 
+		der Standard-API sind.
+
+		\vspace{5mm}
+
+		Man muss allerdings bei der Entwicklung darauf achten, dass die Support Library 
+		mehrere Bibliotheken mit unterschiedlichen Anforderungen an die minimal unterstützte API 
+		enthält. Welche Bibliothek welche Anforderungen stellt, kann man ganz einfach der 
+		Verzeichnisstruktur der Support Library entnehmen. Alle Bibliotheken mit einer 
+		minimalen API-Version 4 findet man unter \emph{v4}.
+   \end{alertblock}
+\end{frame}
+
+\begin{frame}
+   \frametitle{Normale Notifications}
+   \begin{itemize}
+      \item Höhe normaler Notifications bis zu 64 dp
+      \item Titel am oberen Rand
+      \item Großes Icon am linken Rand
+      \item Zusatztext am unteren Rand
+      \item Kleine Zusatzinformation und ein kleines Icon am rechten unteren Rand
+      \item Zeitpunkt am rechten oberen Rand
+   \end{itemize}
+\end{frame}
+
+\begin{frame}
+   \frametitle{Erweiterte Notifications}
+   \begin{itemize}
+      \item Eingeführt in Android 4.1
+      \item Gleiches Aussehen, wie normale Notifications
+      \item Können allerdings ausgeklappt werden
+      \item Zustätzlicher Bereich zwischen Titelzeile und der Textzeile am unteren Rand
+      \item Verschiedene Anzeigen für 
+         \begin{itemize}
+            \item Großes Bild
+            \item Längeren Text
+            \item Zeilenweiser Text (Liste)
+         \end{itemize}
+   \end{itemize}
+\end{frame}
+
+\section{Erstellen von Notifications}
+\begin{frame}
+   \frametitle{Allgemeines}
+   \begin{itemize}
+      \item Deklarierung mit \emph{Notification.Builder} 
+      \item Erzeugen mit Methode \emph{build()}
+      \item Weitergabe an System mit \emph{NotificationManager}
+      \item Verschiedene Einstellung im \emph{Notification.Builder} möglich
+   \end{itemize}
+
+   \begin{attrDesc}{+p{4cm}|^p{6cm}}
+      Methode & Beschreibung\\
+      \hline
+      \emph{setSmallIcon()} & Ein kleines Icon, dass in der NotificationBar angezeigt wird\\
+      \emph{setContentTitle()} & Der Titel der Notification\\
+      \emph{setContentText()} & Ein kurzer Text mit Zusatzinformationen\\
+   \end{attrDesc}
+\end{frame}
+
+\begin{frame}
+   \frametitle{Näheres zu Attributen}
+   \begin{itemize}
+      \item Zuweisung von Icons oder Sounds
+      \item Zuweisung einer Aktion immer sinnvoll
+      \item Aktion wird als PendingIntent an \emph{setContentIntent()} übergeben
+      \item PendingIntent erlaubt anderer Applikation eine Aktivität zu starten
+   \end{itemize}
+
+   \lstinputlisting[
+      caption=Erstellen einer Notification,
+      label={lst:notificationBuilder.java}]{src/java/notificationBuilder.java}
+\end{frame}
+
+\begin{frame}
+   \frametitle{Hinweise}
+
+   \begin{alertblock}{Methode \emph{build()}}
+      Seit API-Version 16 ist die Methode \emph{getNotification()} der Klasse 
+      Notification.Builder als \emph{deprecated} gekennzeichnet. Man sollte 
+      daher wenn möglich auf die Methode \emph{build()} zurückgreifen, die 
+      allerdings in älteren Versionen nicht unterstützt wird.
+   \end{alertblock}
+
+   \begin{alertblock}{NotificationCompat.Builder}
+      Seit API-Level 11 (Android Version 3.0) bietet Android die Klasse 
+      \emph{TaskStackBuilder}, die sich um die Verwaltung des Back-Stacks 
+      bei der Navaigation kümmert. Die Navigation mit Hilfe des \emph{Zurück}-Buttons 
+      ist nur innerhalb einer Applikation festgelegt, aber nicht der Wechsel zwischen 
+      Applikationen.
+
+      \vspace{3mm}
+
+      Der \emph{TaskStackBuilder} ist auch kompatibel 
+      zu älteren Versionen von Android. So wird seit Android 3.0 beim Aufruf von 
+      \emph{startActivities()} oder \emph{getPendingIntent(int, int)} ein 
+      seperater Back-Stack angelegt, während in älteren Versionen nur die oberste 
+      Aktivität des übergebenen Stacks ausgeführt und so die Navigation zur aufrufenden 
+      Applikation ermöglicht wird.
+   \end{alertblock}
+\end{frame}
+
+\begin{frame}
+   \frametitle{Einbinden des \emph{TaskStackBuilders}}
+
+   \lstinputlisting[
+      caption=Einbinden des TaskStackBuilders,
+      label={lst:taskStackNotification.java}]{src/java/taskStackNotification.java}
+\end{frame}
+
+\begin{frame}
+   \frametitle{Screenshot}
+   \begin{figure}[h!]
+     \centering
+     \subfigure[Icon in NotificationBar]{
+       \includegraphics[width=0.49\textwidth]{pictures/notificationBar.ps}
+     }\hfill
+     \subfigure[Eintrag in Notification-DropDown]{
+       \includegraphics[width=0.49\textwidth]{pictures/notificationDropDown.ps}
+     }
+     \caption{
+        Notifications im Einsatz
+     }
+     \label{fig:notifications}
+   \end{figure}
+\end{frame}
+
+\section{Verwalten von Notifications}
+\begin{frame}
+   \frametitle{Allgemeines}
+   \begin{itemize}
+      \item Benachrichtigung des Anwenders in kurzen Zeitabständen
+      \item Aktualisierung von Notifications entlastet System und Anwender
+      \item Bei Übergabe an das System mit \emph{NotificationManager} ID angeben
+      \item System aktualisiert automatisch Notifications mit selber ID
+   \end{itemize}
+
+   \lstinputlisting[
+      caption=Notifications ändern,
+      label={lst:updateNotification.java}]{src/java/updateNotification.java}
+\end{frame}
+
+\begin{frame}
+   \frametitle{Screenshot}
+   \begin{figure}[h!]
+     \centering
+     \includegraphics[width=0.7\textwidth]{pictures/updateNotification.ps}
+     \caption{
+        Aktualisieren einer Notification
+     }
+     \label{fig:updateNotification}
+   \end{figure}
+\end{frame}
+
+\begin{frame}
+   \frametitle{Entfernen von Notifications}
+   \begin{itemize}
+      \item Notifications werden nur durch Benutzeraktion gelöscht
+      \item Alternativ kann Notification beim anklicken gelöscht werden 
+         (\emph{setAutoCancel()})
+      \item Löschen durch NotificationManager mit \emph{cancelAll()} oder 
+         \emph{cancel(ID)} 
+   \end{itemize}
+\end{frame}
+
+\section{Prozesse und Notifications}
+\begin{frame}
+   \frametitle{Allgemeines}
+   \begin{itemize}
+      \item Anzeige einer ProgressBar in Notification
+      \item Verwendung der View-Klasse ProgressBar
+      \item Unterscheidung in deterministische und nicht deterministische ProgressBar
+      \item Bis Android 4.0 Einbindung über eigenes Layout
+      \item Seit Android 4.0 Einbindung mit \emph{setProgress()}
+      \item Methode \emph{setProgress()} aktualisiert auch den Zustand
+   \end{itemize}
+\end{frame}
+
+\begin{frame}
+   \frametitle{Implementierung}
+   \lstinputlisting[
+      caption=Deterministische ProgressBar in Notifications,
+      label={lst:determinateProgress.java}]{src/java/determinateProgress.java}
+\end{frame}
+
+\begin{frame}
+   \frametitle{Screenshot}
+   \begin{figure}[h!]
+     \centering
+     \subfigure[ProgressBar während des Downloads]{
+        \includegraphics[width=0.49\textwidth]{pictures/determinateProgress.ps}
+     }\hfill
+     \subfigure[ProgressBar nach dem Download]{
+        \includegraphics[width=0.49\textwidth]{pictures/determinateProgressFinished.ps}
+     }
+     \caption{
+        Eine determistische ProgressBar
+     }
+     \label{fig:determinateProgress}
+   \end{figure}
+\end{frame}
+
+\begin{frame}
+   \frametitle{Nicht deterministische ProgressBar}
+   \begin{itemize}
+      \item Dritter Parameter von \emph{setProgress} ist \emph{true}
+      \item Erster und zweiter Parameter werden ignoriert
+   \end{itemize}
+
+   \lstinputlisting[
+      caption=Nicht deterministische ProgressBar in Notifications,
+      label={lst:indeterminateProgress.java}]{src/java/indeterminateProgress.java}
+\end{frame}
+
+\begin{frame}
+   \frametitle{Screenshot II}
+   \begin{figure}[h!]
+     \centering
+     \includegraphics[width=0.7\textwidth]{pictures/indeterminateProgress.ps}
+     \caption{
+        Eine nicht determistische ProgressBar
+     }
+     \label{fig:indeterminateProgress}
+   \end{figure}
+\end{frame}
+
+\begin{frame}
+   \frametitle{Hinweis}
+   \begin{alertblock}{Eigene Layouts}
+      In älteren Android Versionen musste eine ProgressBar über ein eigenes Layout eingefügt werden. 
+      Natürlich ist es auch in neueren Versionen von Android möglich eigene Layouts zu deklarieren. 
+      Dabei ist allerdings darauf zu achten, dass die normale Ansicht 
+      nur 64dp und die erweiterte Ansicht 256dp hoch ist.
+
+      \vspace{5mm}
+
+      Deklaration eines eigenen Layouts erfolgt in XML. Das Layout wird als RemoteView 
+      geladen und mit \emph{setContent()} der Klasse \emph{Notification.Builder} bzw. 
+      \emph{NotificationCompat.Builder} zugewiesen. Dabei sollten 
+      Hintergundbilder vermieden werden, da sonst die Schrift unlesbar werden könnte. 
+      Außerdem sollte auf komplexe Layouts verzichtet werden. Der Einsatz von 
+      System-Resourcen ist sehr zu empfehlen.
+   \end{alertblock}
+\end{frame}
