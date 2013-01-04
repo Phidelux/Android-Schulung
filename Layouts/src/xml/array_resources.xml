@@ -1,0 +1,13 @@
+<resources>
+    <array name="game_icons">
+        <item>@drawable/wow</item>
+        <item>@drawable/diablo</item>
+        <item>@drawable/cs</item>
+    </array>
+	<array name="ubuntu_array">
+	    <item>Ubuntu 4.10 (Warty Warthog)</item>
+	    <item>Ubuntu 5.04 (Hoary Hedgehog)</item>
+	    <item>Ubuntu 5.10 (Breezy Badger)</item>
+	    ...
+	</array>
+</resources>
