@@ -8,11 +8,7 @@ public class HelloView extends Activity {
     public void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
       setContentView(R.layout.activity_hello_view);
-
-		// Fetch the chronometer.
 		chron = (Chronometer) this.findViewById(R.id.chronometer);
-
-		// Load the start/stop button.
 		startStop = (Button) this.findViewById(R.id.startStopwatch);
     }
 

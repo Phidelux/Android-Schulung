@@ -29,7 +29,7 @@
 \begin{frame}
    \frametitle{Allgemeines}
    \begin{itemize}
-      \item Oberflächen für Aktivitäten, Menüs, Dialogen und Widgets
+      \item Oberflächen für Aktivitäten, Menüs, Dialoge und Widgets
       \item Grundelemente Views und ViewGroups (Layouts \& AdapterViews)
       \item Deklaration im XML-Format
       \item Formatierung eines Elements über Attribute
@@ -50,11 +50,11 @@
    \frametitle{Deklaration}
    \begin{itemize}
       \item Erstellung von Layouts erinnert an HTML-Code
-      \item Jedes layout darf nur ein Wurzelelement enthalten 
-         (View, ViewGroup, Layout, Merge)
+      \item Jedes Layout darf nur ein Wurzelelement enthalten 
+         (View, ViewGroup, Merge)
       \item Darunter beliebig verschachtelte Layout-Hierarchie
-      \item Speichern von Layouts unter \emph{/res/layouts}
-      \item Zugriff im Quellcode über automatisch generierte Klasse \emph{R}
+      \item Speichern von Layouts unter \emph{res/layouts/}
+      \item Zugriff im Quellcode über automatisch generierte Klasse \emph{R} (\emph{gen/})
       \item Zugriff in anderen Layouts über \emph{@[package:]layout/filename}
    \end{itemize}
 \end{frame}
@@ -64,20 +64,22 @@
    \frametitle{Allgemeines}
    \begin{itemize}
       \item Struktur-Elemente, die andere Views anordnen
-      \item LinearLayout, das FrameLayout oder das RelativeLayout
+      \item Bsp.: LinearLayout, FrameLayout oder RelativeLayout
       \item Weitere ViewGroups ohne Kindelemente (Bsp: AdapterView)
       \item Basis-Attribute ID (optional), sowie Breite und Höhe
    \end{itemize}
 
    \begin{alertblock}{Android-IDs}
       Eindeutige ID eines Layout-Elements wird über \emph{android:id} 
-      in der Form \emph{@+id/name} deklariert. + signalisiert dabei, dass es sich 
-      um eine neue ID handelt. Diese ID kann im Quellcode mit \emph{R.id.name} 
-      referenziert werden.\\
+      in der Form \emph{@+id/name} deklariert und kann mit \emph{R.id.name} 
+      referenziert werden. + signalisiert dabei, dass es sich 
+      um eine neue ID handelt.
+      
+      \vspace{3mm}
 
       Alternativ kann eine ID als Resource deklariert und mit \emph{@id/name} 
-      referenziert werden. Die Deklaration einer solchen Resource wird in XML vorgenommen 
-      und unter einem beliebigen Dateinamen unter \emph{/res/values} abgelegt.\\
+      referenziert werden. Die XML-Deklaration kann unter einem beliebigen 
+      Dateinamen in \emph{/res/values} abgelegt werden.\\
 
       \lstinputlisting[
          backgroundcolor=\color{boxcol},language=xml,
@@ -90,15 +92,12 @@
    \begin{itemize}
       \item Bemaßungen eines ViewGroups mit den Attributen \emph{android:layout\_width} 
 			und \emph{android:layout\_height} entweder explizit oder implizit
-      \item Explizite Angabe erfolgt dabei als Wert oder als Resource
+      \item Explizite Angabe erfolgt dabei als Wert (px, dp, sp, pt, in, mm) oder als Resource
       \item Implizite über die Schlüsselwörter \emph{fill\_parent}, 
          \emph{match\_parent} oder \emph{wrap\_content}
    \end{itemize}
 
-   Zur Bemaßungen können verschiedene Einheiten (px, dp, sp, pt, in, mm) 
-   oder Schlüsselwörter verwenden.\\
-
-	\begin{attrDesc}{+p{3cm}|^p{7cm}}
+	\begin{attrDesc}{+p{4cm}|^p{6cm}}
 		Schlüsselwort & Beschreibung\\
 		\hline
       \emph{match\_parent} & Weist aktuellem Objekt die Größe des Eltern-Elements zu 
@@ -109,14 +108,13 @@
 
    Alternativ kann man auch eine Resource im Quellcode über die Klasse \emph{R} 
    oder in einer XMl-Datei mit dem Schlüssel \emph{@[package:]dimen/dimension\_name} 
-   referenziert.\\
+   referenzieren.\\
 
    \lstinputlisting[
-      backgroundcolor=\color{boxcol},language=xml,
-      caption=Deklaration von Dimensionen,label={lst:dimen.xml}]{src/xml/dimen.xml}
+      language=xml,caption=Deklaration von Dimensionen,label={lst:dimen.xml}]{src/xml/dimen.xml}
 \end{frame}
 
-\section{View}
+\section{Views}
 \begin{frame}
    \frametitle{Allgemeines}
    \begin{itemize}
@@ -143,9 +141,9 @@
 \begin{frame}
    \frametitle{Include}
    \begin{itemize}
-      \item Verbinden bereits existierender Layouts
+      \item Verbindet bereits existierende Layouts
       \item Element \emph{\textless{}include\textgreater}
-      \item Einziges eigenes Attribut Name des einzubinden Layouts
+      \item Einziges eigenes Attribut -- Name des einzubinden Layouts
       \item Optional eine ID, sowie Breite und Höhe des Layouts
       \item Werte überschreiben die Werte des Wurzelknotens im eingebundenen Layout
       \item Änderungen an den Bemaßungen mit \emph{android:layout\_width} und 
@@ -195,7 +193,7 @@
 		   der Text angezeigt werden soll [enum] \\
 		android:textAllCaps & Flag um Text in Großbuchstaben auszugeben [boolean] \\
 		android:shadowColor & Farbe des Text-Schattens [color] \\
-		android:shadowRadius & Radius des Textschattens [double] \\
+		android:shadowRadius & Radius des Text-Schattens [double] \\
 		android:shadowDx & Verschiebung des Schattens in x-Richtung [double] \\
 		android:shadowDy & Verschiebung des Schattens in y-Richtung [double] \\
 	\end{attrDesc}
@@ -232,7 +230,7 @@
 		\hline
 		android:hint & Text der angezeigt werden soll, wenn das Eingabefeld leer ist\\
 		android:lines & Höhe des Eingabefeldes in Zeilen\\
-		android:maxLength & Maximale Länge der EingabeFarbe des Textes\\
+		android:maxLength & Maximale Länge der Eingabe\\
 		android:password & Erlaubt das verstecken des eingegeben Texts 
 		   und deaktiviert die Autovervollständigung [boolean] \\
 		android:textColorHint & Farbe des Stanard-Textes [color] \\
@@ -256,7 +254,7 @@
 	\end{figure}
 \end{frame}
 
-\subsection{Button}
+\section{Button}
 \begin{frame}
    \frametitle{Allgemeines}
    \begin{itemize}
@@ -275,12 +273,8 @@
 \end{frame}
 
 \begin{frame}
-   \frametitle{Deklaration im Layout}
-	\lstinputlisting[language=xml,caption=Button,label={lst:button.xml}]{src/xml/button.xml}
-\end{frame}
-
-\begin{frame}
-   \frametitle{Implementierung des Callbacks}
+   \frametitle{Deklaration \& Implementierung}
+	\lstinputlisting[language=xml,caption=Button Layout,label={lst:button.xml}]{src/xml/button.xml}
 	\lstinputlisting[caption=Button OnClickListener,label={lst:onButtonClicked.java}]{src/java/onButtonClicked.java}
 \end{frame}
 
@@ -300,10 +294,11 @@
 \begin{frame}
    \frametitle{Allgemeines}
    \begin{itemize}
-      \item Abstrakte View Klasse -- Kann nicht direkt verwendet werden
+      \item Abstrakte View-Klasse\\
+      	$\rightarrow$ Kann nicht direkt verwendet werden
       \item Abgeleitet von der Klasse Button
       \item Kennt zwei Zustände aktiviert (\emph{checked}) und deaktiviert (\emph{unchecked})
-      \item Basis-Klasse für z.B. CheckBox, RadioButton, ToggleButton
+      \item Basis-Klasse für z.B. CheckBox, RadioButton und ToggleButton
    \end{itemize}
 
 	\begin{attrDesc}{+p{4cm}|^p{6cm}}
@@ -313,10 +308,7 @@
 		   der Schaltfläche angezeigt werden soll [drawable]\\
 		android:checked & Gibt den initialen Zustand der Schaltfläche an [boolean]\\
 	\end{attrDesc}
-\end{frame}
-
-\begin{frame}
-   \frametitle{Layout Deklaration}
+	
 	\lstinputlisting[language=xml,caption=CompoundButton,label={lst:compound_button.xml}]{src/xml/compound_button.xml}
 \end{frame}
 
@@ -423,10 +415,7 @@
       \item Dienen der Gruppierung von RadioButtons
       \item Immer nur ein einzelner RadioButton aktiviert
    \end{itemize}
-\end{frame}
-
-\begin{frame}
-   \frametitle{Deklaration im Layout}
+   
 	\lstinputlisting[language=xml,caption=RadioGroup,label={lst:radio_group.xml}]{src/xml/radio_group.xml}
 \end{frame}
 
@@ -452,10 +441,7 @@
       \item Einsatz sinnvoll mit Spinnern und ListViews, wenn \emph{setChoiceMode()} 
       	auf \emph{CHOICE\_MODE\_NONE} gesetzt
    \end{itemize}
-\end{frame}
-
-\begin{frame}
-   \frametitle{Deklaration im Layout}
+   
 	\lstinputlisting[language=xml,caption=CheckedTextView,label={lst:checked_textview.xml}]{src/xml/checked_textview.xml}
 \end{frame}
 
@@ -524,15 +510,9 @@
       \item Sieht normalerweise aus wie Button mit Bild
       \item Angabe von Callback mit \emph{android:onClick}
    \end{itemize}
-\end{frame}
-
-\begin{frame}
-   \frametitle{Deklaration im Layout}
+   
 	\lstinputlisting[language=xml,caption=ImageButton,label={lst:imagebutton.xml}]{src/xml/imagebutton.xml}
-\end{frame}
-
-\begin{frame}
-   \frametitle{Implementierung des Callbacks}
+	
 	\lstinputlisting[caption=Methode onImageButtonClicked,label={lst:onImageButtonClicked.java}]{src/java/onImageButtonClicked.java}
 \end{frame}
 
@@ -564,7 +544,7 @@
 
 		\vspace{3mm}
 
-		Diese Datei legt man wie ein normales Bild unter \emph{/res/drawable} ab.
+		Diese Datei legt man wie ein normales Bild unter \emph{res/drawable/} ab.
 	\end{alertblock}
 \end{frame}
 
@@ -577,8 +557,12 @@
       \item Möglichkeit einen zweiten Ladebalken anzuzeigen (Bsp. Buffering)
    \end{itemize}
    
+   \vspace{5mm}
+   
    Android bietet verschiedene Styles, die über das Attribut \emph{style} 
    in der Form \emph{@android:style/style\_name} ausgewählt werden:
+   
+   \vspace{5mm}
 
 	\begin{itemize}
 		\item Widget.ProgressBar.Inverse
@@ -595,7 +579,7 @@
 	\begin{attrDesc}{+p{4cm}|^p{6cm}}
 		Attribut & Beschreibung\\
 		\hline
-		android:indeterminate & Aktiviert den \emph{indeterminate} Modus einer ProgressBar \\
+		android:indeterminate & Aktiviert den \emph{nicht deterministischen} Modus einer ProgressBar \\
 		android:max & Legt den maximalen Wert fest [double]\\
 		android:maxHeight & Maximale Höhe der Bar [dimension]\\
 		android:maxWidth & Maximale Breite der Bar [dimension]\\
@@ -634,7 +618,7 @@
    \frametitle{Allgemeines}
    \begin{itemize}
       \item Stellen ein DropDown-Menü bereit
-      \item Alternativ anzeige als Dialog
+      \item Alternativ kann Dialog angezeigt werden
       \item Platz sparende Alternative zu RadioGroups
       \item Initialisierung mit einem Start-Wert möglich
    \end{itemize}
@@ -650,12 +634,7 @@
 \end{frame}
 
 \begin{frame}
-   \frametitle{Deklaration im Layout}
-	\lstinputlisting[language=xml,caption=Spinner,label={lst:spinner.xml}]{src/xml/spinner.xml}
-\end{frame}
-
-\begin{frame}
-   \frametitle{Implementierung}
+   \frametitle{Deklaration \& Implementierung}
 	\lstinputlisting[caption=Ein Spinner-Adapter,label={lst:spinner.java}]{src/java/spinner.java}
 \end{frame}
 
@@ -674,7 +653,7 @@
 
 \begin{frame}
    \frametitle{Anmerkung}
-	\begin{alertblock}
+	\begin{alertblock}{String-Arrays}
 		Auswahllisten, wie Spinner, können mit String-Array-Resourcen befüllt und 
 		sprachunabhängig gestaltet werden. Deklaration in der Sprachdatei 
 		\emph{string.xml} unter \emph{/res/values}. 
@@ -693,7 +672,7 @@
    \begin{itemize}
       \item Benutzeroberfläche für Timer
       \item Abgeleitet von Klasse \emph{TextView}
-      \item Startwert mit \emph{elapsedRealtime()} Mathode aus 
+      \item Startwert mit \emph{elapsedRealtime()} Methode aus 
          \emph{SystemClock} Klasse setzen
       \item Alternativ: Automatisch mit \emph{start()} initialisieren
       \item Format \emph{MM:SS} oder \emph{H:MM:SS}
@@ -748,7 +727,7 @@
       diese Rechte gesetzt werden müssen. Dazu muss die Zeile aus 
       Listing~\ref{lst:internet_permissions.xml} eingebunden werden.
 
-      \vspace{5mm}
+      \vspace{3mm}
 
       \lstinputlisting[
          backgroundcolor=\color{boxcol},language=xml,caption=Internet Zugriffsrechte,
@@ -827,7 +806,7 @@
    \begin{itemize}
       \item \emph{DatePicker} ist abgeleitet von Klasse \emph{FrameLayout}
       \item Oberfläche zur Auswahl eines Datums
-      \item Kann als mehrerer Spinner oder Kalender (\emph{CalendarView}) angezeigt werden
+      \item Kann als Spinner oder Kalender (\emph{CalendarView}) angezeigt werden
    \end{itemize}
 
    \begin{attrDesc}{+p{4cm}|^p{6cm}}
@@ -872,7 +851,6 @@
    \begin{itemize}
       \item Ermöglicht eine horizontale oder vertikale Anordnung seiner Kindelemente
       \item Reihenfolge in der Definition der Kindelemente wird eingehalten
-      \item Kann als mehrerer Spinner oder Kalender (\emph{CalendarView}) angezeigt werden
       \item Unterstützt Gewichtungen von Kindelementen (\emph{android:layout\_weight})
    \end{itemize}
 
@@ -884,7 +862,7 @@
       android:gravity & Definiert, wie der Inhalt des Layouts angeordnet werden 
          soll [int]\\
       android:measureWithLargestChild & Falls dieses Flag aktiviert wird, 
-         werden alle Kindelemente mit gewichtung dazu gezwungen ihre minimale 
+         werden alle Kindelemente mit Gewichtung dazu gezwungen ihre minimale 
          Größe an die des größten Elements anzupassen[boolean]\\
       android:orientation & Legt fest, ob die Kindelemente horizontal oder vertikal angeordnet werden [int]\\
       android:weightSum & Legt die maximale Summe der Gewichtungen fest\\
@@ -898,12 +876,9 @@
       kann die Breite des Kindelements im horizontalen Layout auf \emph{0dp}, 
       im vertikalen Layout die Höhe auf \emph{0dp} gesetzt werden. Damit dies 
       jedoch funktioniert müssen alle Kindelement mit 1 gewichtet werden. Dazu 
-      setzt man das Attribut \emph{android:layout\_weight} jedes Kindelemnts auf 1.
+      setzt man das Attribut \emph{android:layout\_weight} jedes Kindelements auf 1.
    \end{alertblock}
-\end{frame}
-
-\begin{frame}
-   \frametitle{Layout}
+   
    \lstinputlisting[language=xml,caption=LinearLayout,label={lst:linear_layout.xml}]{src/xml/linear_layout.xml}
 \end{frame}
 
@@ -931,16 +906,15 @@
    \begin{attrDesc}{+p{4cm}|^p{6cm}}
       Attribut & Beschreibung\\
       \hline
-      android:gravity & Legt fest, wie der Inhalt innerhalb des Views positioniert werden soll [int]\\
-      android:ignoreGravity & Legt fest welches View das \emph{android:gravity} Attribut ignoriert [int]\\
+      android:gravity & Positionierung der Inhalte innerhalb des Views [int]\\
       android:layout\_alignParentTop & Legt die Oberkante des Kindelements an die Oberkante des Vaters [boolean]\\
-      android:layout\_centerInParent & Zentriert das Kindelement vertikal und horizontal in seinem Vater[boolean]\\
-      android:layout\_centerHorizontal & Zentriert das Kindelement horizontal in seinem Vater[boolean]\\
-      android:layout\_centerVertical & Zentriert das Kindelement vertikal in seinem Vater[boolean]\\
-      android:layout\_above & Positioniert das Element über dem View dessen ID angegeben wurde [resource]\\
-      android:layout\_below & Positioniert das Element unter dem View dessen ID angegeben wurde [resource]\\
-      android:layout\_toRightOf & Positioniert das Element rechts neben dem View dessen ID angegeben wurde [resource]\\
-      android:layout\_toLeftOf & Positioniert das Element links neben dem View dessen ID angegeben wurde [resource]\\
+      android:layout\_centerInParent & Vertikale \& horizontale Zentrierung im Vater[boolean]\\
+      android:layout\_centerHorizontal & Horizontale Zentrierung im Vater[boolean]\\
+      android:layout\_centerVertical & Vertikale Zentrierung im Vater[boolean]\\
+      android:layout\_above & Positionierung über dem View [resource]\\
+      android:layout\_below & Positionierung unter dem View [resource]\\
+      android:layout\_toRightOf & Positionierung rechts neben dem View [resource]\\
+      android:layout\_toLeftOf & Positionierung links neben dem View [resource]\\
    \end{attrDesc}
 \end{frame}
 
@@ -1003,8 +977,6 @@
    \begin{itemize}
       \item Platziert Inhalte in einer Tabellenstruktur
       \item Zeilen werden explizit angegeben, Spalten implizit angenommen werden
-      \item Größe des FrameLayouts wird durch größtes Kindelement festgelegt (zzgl. Padding) 
-      \item Egal ob Kinder sichtbar oder nicht
    \end{itemize}
 
    \begin{attrDesc}{+p{4cm}|^p{6cm}}
@@ -1024,6 +996,11 @@
 \end{frame}
 
 \begin{frame}
+   \frametitle{Deklaration im Layout II}
+   \lstinputlisting[language=xml,caption=TableLayout,label={lst:table_layout_two.xml}]{src/xml/table_layout_two.xml}
+\end{frame}
+
+\begin{frame}
    \frametitle{Screenshot}
    \begin{figure}[h!]
      \centering
@@ -1039,31 +1016,18 @@
 \begin{frame}[label=scrollview]
    \frametitle{Allgemeines}
    \begin{itemize}
-      \item ScrollView von FrameLayout abgeleitet
-      \item Erlaubt, dass das Layout größer ist als das eigentliche Display erlaubt
-      \item Kann nur ein Kind enthalten
-      \item Egal ob Kinder sichtbar oder nicht
+      \item Abgeleitet von FrameLayout 
+      \item Ermöglicht, dass das Layout größer ist als das eigentliche Display erlaubt
+      \item Kann nur ein Kind enthalten (sichtbar oder nicht)
    \end{itemize}
 
    \begin{alertblock}{ListViews}
-		Auch wenn dies möglich ist, sollte man ein ScrollView niemals mit einem ListView 
-		verwenden, da sich dies bereits selbst um das scrollen seiner Elemente kümmert. 
+		Ein ScrollView sollte niemals mit einem ListView verwendet werden, 
+		da sich dies bereits selbst um das Scrollen seiner Elemente kümmert. 
 		Sollte man dies dennoch tun, zwingt man das ListView dazu sich auf die benötigte 
-		länge auszudehnen um alle Elemente anzeigen zu können. Dies würde dafür sorgen, 
-		dass die in ListView implementierten Optimierungen zur Anzeige großer Listen 
-		umgangen werden.
+		Länge auszudehnen um alle Elemente anzeigen zu können. Die in ListView 
+		implementierten Optimierungen zur Anzeige großer Listen würden somit umgangen werden.
    \end{alertblock}
-\end{frame}
-
-\begin{frame}
-   \frametitle{Attribute}
-
-   \begin{attrDesc}{+p{4cm}|^p{6cm}}
-      Attribut & Beschreibung\\
-      \hline
-      android:fillViewport & Ermöglicht es den Inhalt so auszudehnen, dass er den 
-         verfügbaren Display-Bereich nutzt [boolean]\\
-   \end{attrDesc}
 
    \begin{alertblock}{Horizontales Scrollen}
 		Ein ScrollView kümmert sich nur um das vertikale Scrollen seines Inhalts. Sollte 
@@ -1074,6 +1038,14 @@
 
 \begin{frame}
    \frametitle{Deklaration im Layout}
+
+   \begin{attrDesc}{+p{4cm}|^p{6cm}}
+      Attribut & Beschreibung\\
+      \hline
+      android:fillViewport & Ermöglicht es den Inhalt so auszudehnen, dass er den 
+         verfügbaren Display-Bereich nutzt [boolean]\\
+   \end{attrDesc}
+   
    \lstinputlisting[language=xml,caption=ScrollView,label={lst:scrollview.xml}]{src/xml/scrollview.xml}
 \end{frame}
 
@@ -1107,19 +1079,7 @@
       \item Liste muss ID \emph{@android:id/list} tragen
       \item View für leere Listen muss ID \emph{@android:id/empty} tragen
    \end{itemize}
-
-   \begin{alertblock}{ListViews \& ScrollView}
-		Auch wenn dies möglich ist, sollte man ein ScrollView niemals mit einem ListView 
-		verwenden, da sich dies bereits selbst um das scrollen seiner Elemente kümmert. 
-		Sollte man dies dennoch tun, zwingt man das ListView dazu sich auf die benötigte 
-		länge auszudehnen um alle Elemente anzeigen zu können. Dies würde dafür sorgen, 
-		dass die in ListView implementierten Optimierungen zur Anzeige großer Listen 
-		umgangen werden.
-   \end{alertblock}
-\end{frame}
-
-\begin{frame}
-   \frametitle{Deklaration im Layout}
+   
    \lstinputlisting[language=xml,caption=ListView,label={lst:hello_list.xml}]{src/xml/hello_list.xml}
 \end{frame}
 
@@ -1147,15 +1107,14 @@
       Wie Zeichenketten, Bemaßungen und Styles können auch Arrays als Resourcen 
       hinterlegt werden.
 
-      \vspace{5mm}
+      \vspace{3mm}
 
       Arrays werden wie gewohnt in XML deklariert. Als Werte des Arrays können 
       praktisch beliebige Resource-Typen, wie Strings, Integer oder Drawables dienen. 
-      Dabei können auch die Typen von verschiedenen Resourcen vermischt werden. 
-      Die entstehende Datei kann unter \emph{res/values/arrays.xml} 
-      abgelegt werden.
+      Dabei können die Typen vermischt werden. Die entstehende Datei kann unter 
+      \emph{res/values/arrays.xml} abgelegt werden.
 
-      \vspace{5mm}
+      \vspace{3mm}
 
       \lstinputlisting[
          backgroundcolor=\color{boxcol},language=xml,
@@ -1167,7 +1126,7 @@
    \frametitle{Resourcen}
 
    \begin{alertblock}{Android-Layouts}
-		Beim betrachten der Klasse HelloList sollten auffallen, dass ein Layout 
+		Beim Betrachten der Klasse HelloList sollte auffallen, dass ein Layout 
 		referenziert wird (\emph{simple\_list\_item\_1}), das bisher nicht erstellt wurde.
 
 		\vspace{5mm}
@@ -1196,7 +1155,7 @@
    \frametitle{Allgemeines}
    \begin{itemize}
       \item GridView ist eine von ListView abgeleitete ViewGroup
-      \item Zweidimensionales Gitter bereitstellt, das auch scrollbar
+      \item Stellt ein zweidimensionales, scrollbares Gitter bereit
    \end{itemize}
 
    \begin{attrDesc}{+p{4cm}|^p{6cm}}
@@ -1269,10 +1228,6 @@
 
 \part{Adapter}
 \frame{\partpage}
-\begin{frame}
-	\frametitle{Contents}
-	\tableofcontents[]
-\end{frame}
 
 \begin{frame}[label=adapter]
    \frametitle{Allgemeines}
@@ -1281,17 +1236,17 @@
       \item Adapter agiert als Brücke zwischen dem View und den anzuzeigenden Daten
       \item Standard-Adapter, wie ArrayAdapter, CursorAdapter oder SimpleCursorAdapter
       \item Adapter-Interfaces, wie ExpandableListAdapter
-      \item Zuweisung eines Adapters mit \emph{setAdapter}
+      \item Zuweisung eines Adapters mit \emph{setAdapter()}
       \item Änderung an den Daten können über \emph{notifyDataSetChanged()} mitgeteilt werden
       \item Allgemeine Klasse BaseAdapter bietet gute Grundlage
    \end{itemize}
 
-   \begin{attrDesc}{+p{5cm}|^p{5cm}}
+   \begin{attrDesc}{+p{4cm}|^p{6cm}}
       Methode & Beschreibung\\
       \hline
       int getCount() & Anzahl der Elemente\\
-      Object getItem(int position) & Zugriff auf die Elemente anhand ihrer Position\\
-      long getItemId(int position) & Zugriff auf die ID der Elemente anhand ihrer Position\\
+      Object getItem(int position) & Zugriff auf Elemente anhand der Position\\
+      long getItemId(int position) & Zugriff auf ID der Elemente anhand der Position\\
       View getView(int position, View convertView, ViewGroup parent) & Bereitstellung des Layouts für ein Element anhand der Position\\
    \end{attrDesc}
 \end{frame}
