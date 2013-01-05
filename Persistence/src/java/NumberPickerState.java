@@ -1,4 +1,4 @@
-private static class NumberPickerState extends BaseNumberPickerState {
+private static class NumberPickerState extends BaseSavedState {
    int value;
 
    public NumberPickerState(Parcelable superState) {

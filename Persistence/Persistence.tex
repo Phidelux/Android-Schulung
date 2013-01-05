@@ -1,5 +1,5 @@
-\title{Android -- Quick \& OOP}
-\subtitle{Einführung in die Android-Programmierung}
+\title{Android -- Eine Einführung}
+\subtitle{Einstellungen, SQLite, Dateisystem \& ContentProvider}
 \author[A. Wilhelm]{Andreas Wilhelm}
 \institute[IfI -- Uni Göttingen]{
    Institut für Informatik\\ Georg-August-Universität Göttingen
@@ -39,8 +39,9 @@
    \end{itemize}
 
    \begin{alertblock}{PreferenceActivity}
-      Bis Android 3.0 wurden Einstellungen über eine von \emph{PreferenceActivity} angezeigt. 
-      Seit Android 3.0 verwendet man vorzugsweise \emph{PreferenceFragments}.
+      Bis Android 3.0 wurden Einstellungen über eine von \emph{PreferenceActivity} 
+      abgeleitete Aktivität angezeigt. Seit Android 3.0 verwendet man 
+      vorzugsweise \emph{PreferenceFragments}.
    \end{alertblock}
 
    \begin{table}[t]
@@ -264,7 +265,7 @@
 \begin{frame}
    \frametitle{Generische Fragments}
    \begin{itemize}
-      \item Bisher deklaration einzelner Fragments
+      \item Bisher Deklaration einzelner Fragments
       \item Implementierung eines generischen Fragments
       \item Übergabe von Inhalten mit \emph{\textless{}extras\textgreater}-Element
    \end{itemize}
@@ -410,9 +411,16 @@
       caption={Das NumberPicker Status-Objekt}]{src/java/NumberPickerState.java}
 \end{frame}
 
-\section{Interner Speicher}
+\part{Interner Speicher}
+\frame{\partpage}
 \begin{frame}
-   \frametitle{Den Status verwalten}
+	\frametitle{Contents}
+	\tableofcontents[]
+\end{frame}
+
+\section{Überblick}
+\begin{frame}
+   \frametitle{Allgemeines}
    \begin{itemize}
       \item Dateien im internen Speicher meistens nur von erstellenden Applikation 
       	nutzbar
@@ -423,6 +431,7 @@
    \end{itemize}
 \end{frame}
 
+\section{Datei-Operationen}
 \begin{frame}
    \frametitle{Datei schreiben}
    Beim Öffnen des Ausgabe-Streams mit \emph{openFileOutput()} 
@@ -456,13 +465,14 @@
 		label={lst:readInternalStorage.java}]{src/java/readInternalStorage.java}
 
 	\begin{alertblock}{Statische Text-Resourcen}
-		Auch größere Texte, wie eine Dokumentation oder eine Hilfe, können 
+		Größere Texte, wie eine Dokumentation oder Hilfe, können 
 		als Resourcen hinterlegt werden. Dazu können beliebige Dateien im Ordner 
-		\emph{res/raw/} gespeichert und mit \emph{openRawResource()} der Klasse \emph{Ressources}, 
+		\emph{res/raw/} gespeichert und mit \emph{Ressources.openRawResource()}, 
 		unter Angabe der ID \emph{R.raw.\textless{}filename\textgreater}, geladen werden.
 	\end{alertblock}
 \end{frame}
 
+\section{Erweiterungen}
 \begin{frame}
    \frametitle{Cache-Dateien}
    \begin{itemize}
@@ -492,8 +502,14 @@
 	\end{alertblock}
 \end{frame}
 
-\section{Externer Speicher}
+\part{Externer Speicher}
+\frame{\partpage}
+\begin{frame}
+	\frametitle{Contents}
+	\tableofcontents[]
+\end{frame}
 
+\section{Überblick}
 \begin{frame}
    \frametitle{Allgemeines}
    \begin{itemize}
@@ -502,7 +518,7 @@
       \item Bei SD-Speicher muss unbedingt Verfügbarkeit geprüft werden
       \item Verwaltet privaten und öffentlichen Speicher
       \item Zugriff über \emph{getExternalFilesDir()} oder \emph{getExternalStoragePublicDirectory()}
-      \item Zugriff über selbst erzeugen Input- und OutputStream
+      \item Zugriff über selbst erzeugten Input- und OutputStream
    \end{itemize}
    
 	\lstinputlisting[
@@ -527,7 +543,7 @@
 \end{frame}
 
 \begin{frame}
-   \frametitle{Privater Speicher}
+   \frametitle{Öffentlicher Speicher}
    \begin{itemize}
    	\item Enthält öffentliche Dateien der Applikation
       \item Dateien sind für alle Applikationen les- und schreibbar
@@ -550,6 +566,7 @@
 	\end{attrDesc}
 \end{frame}
 
+\section{Erweiterungen}
 \begin{frame}
    \frametitle{Cache-Speicher}
    \begin{itemize}
@@ -566,7 +583,14 @@
 	\end{alertblock}
 \end{frame}
 
-\section{SQLite}
+\part{SQLite}
+\frame{\partpage}
+\begin{frame}
+	\frametitle{Contents}
+	\tableofcontents[]
+\end{frame}
+
+\section{Überblick}
 \begin{frame}
    \frametitle{Allgemeines}
    \begin{itemize}
@@ -588,6 +612,7 @@
 		label={lst:SQLiteOpenHelper.java}]{src/java/SQLiteOpenHelper.java}
 \end{frame}
 
+\section{SQLite-Abfragen}
 \begin{frame}
    \frametitle{Datenbank-Zugriff}
    \begin{itemize}
@@ -623,6 +648,7 @@
    \end{itemize}
 \end{frame}
 
+\section{Ergebnisse verarbeiten}
 \begin{frame}
    \frametitle{Cursor}
    \begin{itemize}
@@ -648,7 +674,7 @@
 \end{frame}
 
 \begin{frame}
-   \frametitle{Implementierung}
+   \frametitle{Anmerkung}
    \begin{alertblock}{\emph{sqlite3} Werkzeug}
 		Das Android SDK stellt das Werkzeug \emph{sqlite3} zur Verfügung, dass dazu verwendet 
 		werden kann die Datenbanken direkt zu verwalten, wodurch Datenbank-Zugriffe 
@@ -656,9 +682,14 @@
 	\end{alertblock}
 \end{frame}
 
+\part{ContentProvider}
+\frame{\partpage}
+\begin{frame}
+	\frametitle{Contents}
+	\tableofcontents[]
+\end{frame}
 
-
-\section{ContentProvider}
+\section{Überblick}
 \begin{frame}
    \frametitle{Allgemeines}
    \begin{itemize}
@@ -675,6 +706,7 @@
    \end{itemize}
 \end{frame}
 
+\section{Lesender Zugriff}
 \begin{frame}
    \frametitle{ContentResolver}
    \begin{itemize}
@@ -720,6 +752,7 @@
 		label={lst:dictionarySql.sql}]{src/sql/dictionarySql.sql}
 \end{frame}
 
+\section{Datenverarbeitung}
 \begin{frame}
    \frametitle{Ergebnisse Durchlaufen}
 	\lstinputlisting[
@@ -734,6 +767,7 @@
 		label={lst:dictionaryAdapter.java}]{src/java/dictionaryAdapter.java}
 \end{frame}
 
+\section{Verwaltung der Daten}
 \begin{frame}
    \frametitle{Daten einfügen}
 	\lstinputlisting[
@@ -774,7 +808,6 @@
 \end{frame}
 
 \section{Eigene ContentProvider}
-
 \begin{frame}
    \frametitle{Allgemeines}
    \begin{itemize}
