@@ -1,0 +1,31 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item 
+        android:id="@+id/menu_calendar"
+        android:title="@string/menu_calendar"
+        android:icon="@drawable/menu_icon_calendar"
+        android:showAsAction="ifRoom" />
+    <item 
+        android:id="@+id/menu_share"
+        android:title="@string/menu_share"
+        android:icon="@drawable/menu_icon_share"
+        android:showAsAction="ifRoom" />
+    <item 
+        android:id="@+id/menu_chat"
+        android:title="@string/menu_chat"
+        android:icon="@drawable/menu_icon_chat" />
+    <item 
+        android:id="@+id/menu_send"
+        android:title="@string/menu_send"
+        android:icon="@drawable/menu_icon_send" />
+    <item 
+        android:id="@+id/menu_search"
+        android:title="@string/menu_search"
+        android:icon="@drawable/menu_icon_search"
+        android:showAsAction="ifRoom" />
+    <item 
+        android:id="@+id/menu_settings"
+        android:title="@string/menu_settings"
+        android:showAsAction="never"
+        android:icon="@drawable/menu_icon_settings" />
+</menu>
+

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item 
+        android:id="@+id/menu_share_flattr"
+        android:title="@string/share_flattr" />
+    <item 
+        android:id="@+id/menu_share_twitter"
+        android:title="@string/share_twitter" />
+    <item 
+        android:id="@+id/menu_share_facebook"
+        android:title="@string/share_facebook" />
+</menu>
