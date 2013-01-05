@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    ...
+    
+    <PreferenceScreen
+        android:summary="@string/lblSettingsDatetimeSummary"
+        android:title="@string/lblSettingsDatetime" >
+        <ListPreference
+            android:dialogTitle="@string/lblSettingsDateTitle"
+            android:key="dateFormat"
+            android:summary="@string/lblSettingsDateSummary"
+            android:title="@string/lblSettingsDateTitle" />
+            
+        ...
+    </PreferenceScreen>
+
+    <PreferenceCategory android:title="@string/lblSettingsNotifications" >
+        <RingtonePreference
+            android:key="notificationRingtone"
+            android:ringtoneType="notification"
+            android:summary="@string/lblSettingsNotificationRingtoneSummary"
+            android:title="@string/lblSettingsNotificationRingtone" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="notificationVibrate"
+            android:summary="@string/lblSettingsNotificationVibrateSummary"
+            android:title="@string/lblSettingsNotificationVibrate" />
+    </PreferenceCategory>
+</PreferenceScreen>

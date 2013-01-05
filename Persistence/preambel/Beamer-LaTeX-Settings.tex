@@ -1,0 +1,71 @@
+% *** Sprache *****************************
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+
+\usepackage[%
+   %final,
+   %draft % do not include images (faster)
+]{graphicx}
+\usepackage{subfigure}
+ 
+\usepackage{xcolor}
+\definecolor{boxheadcol}{RGB}{59, 91, 134}
+\definecolor{boxcol}{gray}{.9}
+
+\definecolor{avedo}{RGB}{59, 91, 134}
+\definecolor{darkgray}{RGB}{69,69,69}
+\definecolor{lightgray}{gray}{.9}
+\definecolor{darkblue}{RGB}{59, 91, 134}
+\definecolor{fgcgray}{rgb}{0.4, 0.4, 0.4}
+\definecolor{bgctitle}{RGB}{59, 91, 134}
+\definecolor{fgctitle}{rgb}{0.99, 0.99, 0.95}
+ 
+\usepackage{tabularx}   % Erweiterte Tabellen Optionen
+\usepackage{booktabs}
+\usepackage{multicol}
+
+\usepackage{amssymb,amsmath}
+\usepackage{listings}
+\usepackage{hyperref}
+ 
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+  language=Java, % the language of the code
+  basicstyle=\tiny, % the size of the fonts that are used for the code
+  numbers=left, % where to put the line-numbers
+  numberstyle=\tiny\color{gray}, % the style that is used for the line-numbers
+  stepnumber=5, % the step between two line-numbers. If it's 1, each line
+  numbersep=5pt, % how far the line-numbers are from the code
+  firstnumber=1,
+  numberfirstline=false,
+  backgroundcolor=\color{white}, % choose the background color. You must add \usepackage{color}
+  showspaces=false, % show spaces adding particular underscores
+  showstringspaces=false, % underline spaces within strings
+  showtabs=false, % show tabs within strings adding particular underscores
+  tabsize=3, % sets default tabsize to 2 spaces
+  captionpos=b, % sets the caption-position to bottom
+  breaklines=true, % sets automatic line breaking
+  breakatwhitespace=false, % sets if automatic breaks should only happen at whitespace
+  title=\lstname, % show the filename of files included with \lstinputlisting;
+  keywordstyle=\color{blue}, % keyword style
+  commentstyle=\color{dkgreen}, % comment style
+  stringstyle=\color{mauve}, % string literal style
+  escapeinside={\%*}{*)}, % if you want to add a comment within your code
+  morekeywords={*,...}, % if you want to add more keywords to the set
+  xleftmargin=2em,
+  xrightmargin=2em,
+  aboveskip=1em,
+  nolol=true
+}
+
+\def\thelstlisting{}
+\makeatletter
+\AtBeginDocument{%
+  \renewcommand \thelstlisting
+       {}%
+}
+\makeatother

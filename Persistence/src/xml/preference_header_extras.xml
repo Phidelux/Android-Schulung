@@ -1,0 +1,15 @@
+<preference-headers 
+	xmlns:android="http://schemas.android.com/apk/res/android">
+	<header 
+      android:fragment="math.elearning.hello.list.SettingsFragment"
+      android:summary="@string/lblSettingsGeneralSummary"
+      android:title="@string/lblSettingsGeneral">
+        <extra android:name="settings" android:value="general" />
+    </header>
+   <header 
+      android:fragment="math.elearning.hello.list.SettingsFragment"
+      android:summary="@string/lblSettingsDatetimeSummary"
+      android:title="@string/lblSettingsDatetime">
+        <extra android:name="settings" android:value="datetime" />
+    </header>
+</preference-headers>

@@ -1,0 +1,8 @@
+...
+
+<Preference android:title="@string/prefs_web_page" >
+    <intent android:action="android.intent.action.VIEW"
+            android:data="http://www.example.com" />
+</Preference>
+
+...

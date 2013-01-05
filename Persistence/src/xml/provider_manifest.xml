@@ -1,0 +1,24 @@
+<manifest>
+	<permission android:name="net.avedo.ubuntu.releases.READ" />
+	<permission android:name="net.avedo.ubuntu.releases.WRITE" />
+    
+	...
+    
+	<application>
+		<provider 
+			android:name="net.avedo.ubuntu.releases.UbuntuOneProvider"
+			android:authorities="net.avedo.ubuntu.releases.ubuntu_one_provider"
+			android:label="@string/provider_description"
+			android:icon="@drawable/ubuntu_logo"
+			android:readPermission="net.avedo.ubuntu.releases.READ"
+			android:writePermission="net.avedo.ubuntu.releases.WRITE"
+			android:grantUriPermssions="false">
+			<grant-uri-permission 
+				android:path="net.avedo.ubuntu.releases.ubuntu_one_provider/documents/ubuntu/" />
+			<grant-uri-permission 
+				android:pathPattern="/images/*/ubuntu/" />
+			<grant-uri-permission 
+				android:pathPrefix="net.avedo.ubuntu.releases.ubuntu_one_provider/images/icons" />
+		</provider>
+	</application>
+</manifest>
