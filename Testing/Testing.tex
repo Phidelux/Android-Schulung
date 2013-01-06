@@ -1,0 +1,70 @@
+\title{Android -- Eine Einführung}
+\subtitle{Testen \& Veröffentlichen}
+\author[A. Wilhelm]{Andreas Wilhelm}
+\institute[IfI -- Uni Göttingen]{
+   Institut für Informatik\\ Georg-August-Universität Göttingen
+}
+\titlegraphic{}
+%\date{\today}
+\date{www.avedo.net}
+
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+\part{Testen von Applikationen}
+\frame{\partpage}
+\begin{frame}
+	\frametitle{Contents}
+	\tableofcontents[]
+\end{frame}
+
+\section{Überblick}
+\begin{frame}
+	\frametitle{Allgemeines}
+	\begin{itemize}
+		\item Android-SDK bringt Emulator und Debugging-Monitor \emph{LogCat} 
+			mit
+		\item Integration von JUnit unter Android
+		\item \emph{monkeyrunner}, eine auf Python basierende Stress-Test-API
+		\item JUnit-Tests sind Emulator basiert
+		\item Mock-Framework zwar theoretisch vorhanden praktisch unbrauchbar
+			$\rightarrow$ Alternativ-Projekte interessant
+	\end{itemize}
+\end{frame}
+
+\section{Aufbau von Unit-Tests}
+\begin{frame}
+	\frametitle{Allgemeines}
+	\begin{itemize}
+		\item Eigenes Android-Projekt mit Test-Paketen und -Klassen
+		\item Eine Klasse implementiert die Tests eines Moduls
+		\item Eine Klassen-Methode einen Test
+		\item Android lädt Test- und das Applikations-Paket mit Test-Runner
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Test-Projekt Erstellen}
+	\begin{itemize}
+		\item Einbindung der SDK-Test-Tools über Eclipse ADT-Plugin
+		\item Erstellen des Projekt-, Source- und Resource-Verzeichnisses
+		\item Anlegen eines Test-Pakets mit Suffix \emph{.test}
+		\item Generieren des Android-Manifests und der ANT-Dateien
+		\item Eintragung des \emph{InstrumentationTestRunner} im Manifest
+		\item Platzieren der Test-Klassen im Source-Ordner (\emph{src/})
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{JUnit Basis}
+	\begin{itemize}
+		\item Java-Tests ohne Android-API-Zugriffe mit \emph{TestCase}
+		\item Andernfalls Verwendung von \emph{AndroidTestCase}
+		\item Spezialisierte Klassen, wie \emph{ApplicationTestCase}, 
+			\emph{LoaderTestCase}, \emph{ProviderTestCase2} oder \emph{ServiceTestCase}
+		\item Alle Klassen ermöglichen Verwendung von JUnit-Assertions
+	\end{itemize}
+\end{frame}
+
+\section{Der Android Lifecycle}
