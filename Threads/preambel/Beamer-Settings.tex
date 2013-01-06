@@ -1,0 +1,58 @@
+% *****************************************
+% >>> Themes <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+% *****************************************
+ 
+% \usetheme[<options>]{<name list>} 		Installs the presentation theme named <name>.
+% \usecolortheme[<options>]{<name list>} Same as \usetheme, only for color themes.
+% \usefonttheme[<options>]{<name>} 		Same as \usetheme, only for font themes.
+% \useinnertheme[<options>]{<name>}		Same as \usetheme, only for inner themes.
+% \useoutertheme[<options>]{<name>}		Same as \usetheme, only for outer themes.
+
+ \usetheme[%
+ 	secheader % section im Header
+]{Boadilla}
+
+\useinnertheme{rectangles} 
+
+\usecolortheme[%
+ 	named=avedo,
+]{structure}
+
+\setbeamercolor*{titlelike}{fg=white,bg=avedo}
+\setbeamercolor*{title in head/foot}{fg=white,bg=avedo}
+\setbeamercolor*{date in head/foot}{fg=white,bg=avedo}
+\setbeamercolor*{author in head/foot}{fg=white,bg=avedo}
+\setbeamercolor*{normal text}{fg=darkgray}
+
+\setbeamercovered{transparent}
+
+
+
+
+% *****************************************
+% >>>> Veraendern der Schrifteinstellung definierter Elemente
+% *****************************************
+ 
+% Beispiele
+% \setbeamerfont{frametitle}{size=\large}
+% \setbeamerfont{frametitle}{series=\bfseries}
+ 
+% weitere Befehle
+% size= size command sets the size attribute of the beamerfont.
+% size*={ size in pt }{ baselineskip }
+% shape= (\itshape, \slshape, \scshape, or \upshape)
+% series= (command like \bfseries.)
+% family= (command like \rmfamily or \sffamily).
+% family*={ family name } (For example, the family name for Times happens to be ptm. )
+% parent={ parent list } specifies a list of parent fonts.
+%
+% Example for parent
+% \setbeamerfont{parent A}{size=\large}
+% \setbeamerfont{parent B}{series=\bfseries}
+% \setbeamerfont{child}{parent={parent A, parent B},size=\small}
+%
+% \usebeamerfont{child}
+% This text is small and bold.
+
+
+
