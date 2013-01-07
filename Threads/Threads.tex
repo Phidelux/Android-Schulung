@@ -23,7 +23,7 @@
       \item Größere Operationen im Main-Thread blockieren diesen
       \item Falls Main-Thread länger als fünf Sekunden blockiert zeigt Android 
       	ANR-Dialog (Application Not Responding)
-      \item Android Grafik-Toolkit eintrittsinvariant
+      \item Android Grafik-Toolkit eintrittsinvariant\\
       	$\rightarrow$ Komponente kann nicht aus verschiedenen Threads verwendet werden\\
       	$\rightarrow$ Änderungen an der grafischen Oberfläche nur im Main-Thread
    \end{itemize}
@@ -124,13 +124,13 @@
    \end{itemize}
 
 	\begin{description}
-		\item[onPreExecute()] Wird vor der Durchführung der eigentlichen 
-			Operation im Main-Thread aufgerufen. In ihr kann beispielsweise 
-			eine Progressbar angezeigt werden, ohne einen Handler zu nutzen.
-		\item[doInBackground(Params...)] Wird im im Hintergrund laufenden Thread aufgerufen. 
-			Sie wird direkt nach Beendigung von \emph{onPreExecute()} aufgerufen und führt die tatsächliche Operation aus. 
-			Die Parameter, die bei der Erstellung des AsyncTasks mit übergeben wurden, 
-			werden dazu an die Methode gereicht. Änderungen, die im Main-Thread angezeigt werden 
+		\item[onPreExecute()] Wird vor der eigentlichen 
+			Operation im Main-Thread aufgerufen. Initialisierung der grafischen Komponenten 
+			ohne Handler.
+		\item[doInBackground(Params...)] Wird direkt nach Beendigung von \emph{onPreExecute()} 
+			im Hintergrund-Thread aufgerufen und führt die tatsächliche Operation aus. 
+			Parameter, die bei der Erstellung des AsyncTasks mit übergeben wurden, 
+			werden an die Methode gereicht. Änderungen, die im Main-Thread angezeigt werden 
 			sollen, können mit einem Aufruf von \emph{publishProgress()} an die Methode 
 			\emph{onProgressUpdate()} weitergegeben werden. Das Ergebnis dieses Schritts wird beim Aufruf 
 			der Methode \emph{onPostExecute()} weitergegeben.
@@ -169,9 +169,16 @@
 \end{frame}
 
 \begin{frame}
+   \frametitle{Implementierung II}
+	\lstinputlisting[
+		caption=AsyncTask aufrufen,
+		label={lst:AsyncTaskExecution.java}]{src/java/AsyncTaskExecution.java}
+\end{frame}
+
+\begin{frame}
    \frametitle{Anmerkungen}
    \begin{itemize}
-     	\item Deutlich Übersichtlicher als Verwendung von Handlern
+     	\item Deutlich übersichtlicher als Verwendung von Handlern
      	\item Gleiche Operation kann iterativ auf mehrere 
 			Eingaben angewendet werden (\emph{execute(url1, url2, ..., urln)})
      	\item Abbrechen eines Tasks mit \emph{cancel(boolean)}
@@ -189,7 +196,7 @@
 \begin{frame}
    \frametitle{Synchronisation}
    \begin{itemize}
-     	\item AsyncTasks synchronisiert Callback-Aufrufe
+     	\item AsyncTasks synchronisiert Callback-Aufrufe\\
      		$\rightarrow$ Daten stehen im nächsten Calllback bereit
      	\item Beispiel: Im Konstruktor oder \emph{onPreExecute()} gesetzte Daten 
      		stehen in \emph{doInBackground()} zur Verfügung 
@@ -198,7 +205,7 @@
 	Es ist dafür wichtig folgendes zu beachten:
 
 	\begin{enumerate}
-		\item Instanzierung der Klasse AsyncTask muss immer im Main-Thread vorgenommen werden
+		\item Instanzierung der Klasse AsyncTask muss im Main-Thread vorgenommen werden
 		\item Das Starten des Tasks mit \emph{execute()} muss im Main-Thread geschehen
 		\item Keine der oben beschrieben Methoden (\emph{onPreExecute()}, \emph{doInBackground()}, ...) 
 			sollte direkt aufgerufen werden -- darum kümmert sich das System
@@ -225,7 +232,7 @@
      	\item Ausführung der Aufgaben sequentiell in nur einem Thread\\
      		$\rightarrow$ Ausführung kann zeitlicher Verschiebung unterliegen
      	\item Aufgaben werden im \emph{One-Shot}-Modus zu absolutem 
-     		oder relativen Zeitpunkt ausgeführt
+     		oder relativem Zeitpunkt ausgeführt
      	\item Regelmäßig wiederkehrende Aufgaben werden in festem Intervall oder 
      		mit festgelegtem zeitlichen Abstand ausgeführt
      	\item Implementierung der Aufgaben als TimerTask
@@ -244,6 +251,13 @@
 	\lstinputlisting[
 		caption=Timer einsetzen,
 		label={lst:Timer.java}]{src/java/Timer.java}
+\end{frame}
+
+\begin{frame}
+   \frametitle{Implementierung II}
+	\lstinputlisting[
+		caption=Timer einsetzen,
+		label={lst:Timer2.java}]{src/java/Timer2.java}
 \end{frame}
 
 \begin{frame}
@@ -283,7 +297,7 @@
      	\item Ausführung einmaliger oder wiederkehrender Aufgaben
      	\item Verteilung der Aufgaben auf einen Thread-Pool
      	\item Aufgaben werden im \emph{One-Shot}-Modus zu absolutem 
-     		oder relativen Zeitpunkt ausgeführt
+     		oder relativem Zeitpunkt ausgeführt
      	\item Regelmäßig wiederkehrende Aufgaben werden in festem Intervall oder 
      		mit festgelegtem zeitlichen Abstand ausgeführt
      	\item Aufgaben können einzeln verwaltet werden ohne Pool zu beeinflussen
@@ -294,13 +308,13 @@
    \frametitle{Vergleich zu Timer}
    \begin{itemize}
      	\item Verwaltung eines Thread-Pools statt sequentieller Ausführung in einem 
-     		Thread 
+     		Thread\\
      		$\rightarrow$ Performanter
      	\item Verwendung von \emph{Runnables} und \emph{Callables} anstatt 
-     		eigener \emph{TimerTask}-Klasse 
+     		eigener \emph{TimerTask}-Klasse\\
      		$\rightarrow$ Flexibler in der Entwicklung
      	\item \emph{Callables} zusätzlich zu \emph{Runnables} (\emph{TimerTask} 
-     		implementiert \emph{Runnable}) 
+     		implementiert \emph{Runnable})\\
      		$\rightarrow$ Erlaubt Rückgabewerte und werfen von Exceptions
      	\item Beide garantieren das Aufgaben nicht vor angestrebten Zeitpunkt 
      		ausgeführt werden, sonst allerdings nichts
@@ -353,4 +367,11 @@
 	\lstinputlisting[
 		caption=ScheduledThreadPoolExecutor einsetzen,
 		label={lst:ScheduledThreadPoolExecutor.java}]{src/java/ScheduledThreadPoolExecutor.java}
+\end{frame}
+
+\begin{frame}
+   \frametitle{Implementierung II}
+	\lstinputlisting[
+		caption=ScheduledThreadPoolExecutor einsetzen,
+		label={lst:ScheduledThreadPoolExecutor2.java}]{src/java/ScheduledThreadPoolExecutor2.java}
 \end{frame}
