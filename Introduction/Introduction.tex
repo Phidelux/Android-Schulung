@@ -138,6 +138,7 @@
 % 3.4.2 Implizite Intents
 % 3.4.3 Ergebnisse von Intents
 % 3.4.4 Intent-Filter
+% 3.4.5 PendingIntents
 % 3.5 Services
 % 3.6 Content-Provider
 % 3.7 Broadcast-Receiver
@@ -465,6 +466,22 @@
 
    \lstinputlisting[caption={Deklaration im Manifest},
 		language=xml,label={lst:intent_filter.xml}]{src/xml/intent_filter.xml}
+\end{frame}
+
+\subsection{Pending Intent}
+\begin{frame}
+   \frametitle{Allgemeines}
+   \begin{itemize}
+      \item PendingIntents kapseln ein Intent und die zur Verwendung benötigten Rechte
+      \item Delegation von Rechten an andere Applikationen bzw. das System
+      \item Starten von Broadcasts und Aktivitäten 
+      \item \emph{PendingIntent.getBroadcast()} bzw. \emph{PendingIntent.getActivity()} 
+      \item Beispiel: Notification-Manager
+\end{frame}
+
+\begin{frame}
+   \frametitle{Beispiel}
+	\lstinputlisting[caption=Email Benachrichtigung,label={lst:email_notification.java}]{src/java/email_notification.java}
 \end{frame}
 
 \section{Services}
