@@ -68,3 +68,273 @@
 \end{frame}
 
 \section{Der Android Lifecycle}
+
+\begin{frame}
+	\frametitle{Instrumentation}
+	\begin{itemize}
+		\item Einflussnahme auf Lebenszyklus einer Applikation wichtig
+		\item Android Klasse \emph{Instrumentation}
+		\item Simulieren das beispielsweise Starten (\emph{onCreate()}) 
+			oder Beenden (\emph{onDestroy}) einer Aktivität
+		\item Beispielanwendung: Prüfung des gespeicherten Zustands einer Aktivität
+		\item Spezialisierte Klassen, wie \emph{ActivityInstrumentationTestCase2}
+	\end{itemize}
+	
+	\begin{alertblock}{AndroidTestCase}
+		\emph{AndroidTestCase} bringt weitaus mehr als Methoden \emph{setUp()} und \emph{tearDown()} mit. 
+		Sie enthält Methoden, die das Testen von Zugriffsrechten ermöglichen und 
+		eine Methode, die Speicher-Lecks verhindert, indem sie Klassen-Referenzen entfernt.
+	\end{alertblock}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Beispiel}
+	\lstinputlisting[
+		caption=Kontrolle des Lifecycle,
+		label={lst:instrumentation.java}]{src/java/instrumentation.java}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Anmerkungen}
+	\begin{itemize}
+		\item Test-Paket und Aktivität werden nicht im selben Thread geladen
+		\item Zugriff auf grafische Oberfläche mit \emph{runOnUiThread()}
+		\item Alternative: Annotation \emph{@UiThreadTest}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Beispiel}
+	\lstinputlisting[
+		caption=Die \emph{@UiThreadTest} Annotation,
+		label={lst:uiThreadAnnotation.java}]{src/java/uiThreadAnnotation.java}
+\end{frame}
+
+\section{Basis-Komponenten und Erweiterungen}
+
+\begin{frame}
+	\frametitle{Anmerkungen}
+	\begin{itemize}
+		\item Bibliotheken für das Testen von Aktivitäten, Services und ContentProvider
+		\item Vor- und Nachbereitung der Tests (\emph{setUp()} und \emph{tearDown()})
+		\item Mock-Objekte als Platzhalter für echte Objekte
+	\end{itemize}
+
+	\begin{alertblock}{BroadcastReceiver}
+		Android stellt keine Bibliothek für das Testen von BroadcastReceivern 
+		bereit. Daher muss die Komponente getestet werden, die das Intent an den Receiver sendet. 
+		Dabei überprüft man, ob der Receiver korrekt antwortet bzw. reagiert.
+	\end{alertblock}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Applikation testen}
+	\begin{itemize}
+		\item \emph{ApplicationTestCase} testet Applikation ansich
+		\item Starten und Beenden der Applikation
+		\item Kein Zugriff auf einzelne Komponenten
+		\item Validierung der Angaben in Manifest
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Assertions}
+	\begin{itemize}
+		\item Android SDK bietet aus JUnit bekannte Assertions
+		\item Komplexere Überprüfungen durch \emph{MoreAsserts}
+		\item View bezogene Assertions durch \emph{ViewAsserts}\\
+			$\rightarrow$ Dient Prüfung von Bemaßung und Positionierung
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Mock-Objekte}
+	\begin{itemize}
+		\item Minimierung der Abhängigkeiten durch \emph{Dependency Injection}
+		\item Verschiedene Komponenten, wie \emph{Context}-, \emph{ContentProvider}- oder  
+			\emph{Service}-Objekte
+		\item Teilweise sogar Nachbildung durch Mock-Intents 
+		\item Leider nur überschriebene Methoden\\
+			$\rightarrow$ Werfen \emph{UnsupportedOperationException}\\
+			$\rightarrow$ Ableitung der Klassen nötig
+		\item Interessant \emph{MockContentResolver} sind vorerst keinem Provider zugeordnet\\
+			$\rightarrow$ Explizite Zuweisung mit \emph{ContentResolver.add(String, ContentProvider)}
+	\end{itemize}
+	
+	\begin{table}[t]
+		\begin{center}
+		   \begin{tabular}{c|c|c|c}
+		      MockApplication & MockContext & MockContentProvider \\
+		      \hline
+		      MockContentResolver & MockPackageManager & MockResources\\
+		      \hline
+		      MockCursor & MockDialogInterface &  \\
+		   \end{tabular}
+		   \label{tab:mock_objects}
+		   \caption{Mock-Objekte}
+		\end{center}
+	\end{table} 
+\end{frame}
+
+\begin{frame}
+	\frametitle{Mock-Context}
+	\begin{itemize}
+		\item Nachbildung globaler Schnittstellen
+		\item Zwei Context-Mock-Objekte
+			\begin{description}
+				\item[IsolatedContext] Klasse stellt einen isolierten Kontext zur Verfügung, 
+					der Operationen auf Dateien, Datenbanken oder Verzeichnissen 
+					in Testumgebung ausführt, was den Funktionsumfang einschränkt.
+				\item[RenamingDelegatingContext] Stellt einen Kontext zur Verfügung, der 
+					fast alle Funktionen durch ein normales \emph{Context}-Objekt ausführen lässt und 
+					nur Datei- und Datenbank-Operationen in einem \emph{IsolatedContext} 
+					ausführt.
+			\end{description}
+	\end{itemize}
+\end{frame}
+
+\section{Tests ausführen}
+
+\begin{frame}
+	\frametitle{Allgemeines}
+	\begin{itemize}
+		\item Ausführung von Tests durch \emph{Test-Runner-Klasse}
+		\item Lädt Tests und zu testendes Projekt
+		\item Vorbereiten (\emph{setUp()}), Ausführen (\emph{run()}) und Nachbereiten 
+			(\emph{tearDown()}) jedes einzelnen Tests
+		\item Standard-Runner-Klasse \emph{InstrumentationTestRunner} 
+			(erweitert JUnit-Test-Runner)
+		\item Deklaration des Test-Runners im Manifest über \emph{\textless{}instrumentation\textgreater}-Element
+		\item Laden einer Bibliothek im Manifest mit \emph{\textless{}uses-library\textgreater}-Element
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Das Manifest}
+	\lstinputlisting[
+		language=xml,caption=Ein Manifest für Test-Projekte,
+		label={lst:testManifest.xml}]{src/xml/testManifest.xml}
+\end{frame}
+
+\section{Zusammenfassung}
+\begin{frame}
+	\frametitle{Fazit}
+	\begin{itemize}
+		\item Unterscheidung zwischen JUnit und Android-JUnit
+		\item Zusätzliche Einbindung von Android-Assertions
+		\item Test-Klassen für Komponenten
+		\item Verschiedene Mock-Objekte
+		\item Spezieller Test-Runner
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Probleme}
+	\begin{itemize}
+		\item Android-JUnit basiert auf JUnit 3 (nicht auf 4)
+		\item Tests werden im Emulator ausgeführt
+		\item Applikation wird für jeden Test neu gepackt und gestartet\\
+			$\rightarrow$ Sehr lange Test-Zeiten
+		\item Manche Dinge nur sehr schwer zu testen (Adapter \& Menüs)
+		\item Unzureichende Mock-Objekte	
+		\item Dalvik VM unterstützt keine Java Reflections 
+			(benötigt von bekannten Mocking Frameworks)
+		\item \emph{android.jar} enthält nur unvolständige Class-Dateien\\
+			$\rightarrow$ Android-Spezifische Klassen werfen auserhalb der Dalvik VM 
+			\emph{RuntimeException}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Alternativen}
+	\begin{itemize}
+		\item Bekannte Mocking-Frameworks, wie \emph{Mockito}, \emph{EasyMock} 
+			oder \emph{jMock} \\
+			$\rightarrow$ Benötigen Java Reflections 
+		\item Android-Wrapper für EasyMock (\emph{android-Mock}) \\
+			$\rightarrow$ Erzeugt die Mock-Objekte bereits zur Compile-Zeit
+		\item \emph{Robolectric} ermöglicht Erzeugen von Android-Komponenten 
+			direkt in JVM (ohne \emph{RuntimeException}) \\
+			$\rightarrow$ Normale Verwendung von \emph{Mockito} oder \emph{EasyMock}\\
+			$\rightarrow$ Erlaubt das schreiben normaler JUnit-Tests
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Robolectric-Beispiel}
+	\lstinputlisting[
+		language=xml,caption=Ein Manifest für Test-Projekte,
+		label={lst:testManifest.xml}]{src/xml/testManifest.xml}
+\end{frame}
+
+\part{Google Play}
+\frame{\partpage}
+\begin{frame}
+	\frametitle{Contents}
+	\tableofcontents[]
+\end{frame}
+
+\begin{frame}
+	\frametitle{Allgemeines}
+	\begin{itemize}
+		\item \emph{Google Play Store} ist der offizielle Android-Markt\\
+			$\rightarrow$ Ausnahme \emph{Kindle Fire} HD\\
+			$\rightarrow$ Erfordert \emph{Publisher Account}\\
+			$\rightarrow$ Benötigt \emph{Google Checkout Merchant Account} für Verkäufe
+		\item Vertrieb von Applikationen, Musik, Büchern und Filmen
+		\item Alternativ privater Vertrieb (Homepage)
+		\item Amazon-Market
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Registrierung}
+	\begin{itemize}
+		\item \emph{Google Play Store} erfordert \emph{Publisher Account}\\
+			$\rightarrow$ Einmalig 25\$\\
+			$\rightarrow$ \href{https://play.google.com/apps/publish/}{https://play.google.com/apps/publish/} 
+		\item Abfrage von Name, Passwort, Geburtsdatum, usw.
+		\item Anlegen eines Entwickler-Profils (Name, Website und Telefonnummer)
+		\item \emph{Vereinbarung für den Entwicklervertrieb} (landesspezifisch)
+		\item Überweisung der 25\$ mit \emph{Google Checkout}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Checkliste}
+	\begin{itemize}
+		\item Prüfen ob der Paketname aussagekräftig ist (kann nicht mehr geändert werden)
+		\item Entfernen des \emph{android:debuggable}-Attibuts aus dem Android-Manifest
+		\item Entfernen aller Debug- und Log-Ausgaben
+		\item Sicherstellen, dass keine Test-Resourcen (beispielsweise Test-Server) 
+			mehr verwendet werden
+		\item Verzeichnis-Struktur des Projekts bereinigen -- Jedes Verzeichnis sollte nur die 
+			für es vorgesehenen Dateien enthalten
+		\item Entfernen unnötiger RAW-Dateien aus \emph{assets/} und \emph{res/raw/}
+		\item Überprüfung der gesetzten Rechte in Android-Manifest
+		\item Hinterlegen eines Namens und eines Icons in Android-Manifest
+		\item Android-SDK-Versionen in Android-Manifest überprüfen
+		\item \emph{android:versionCode} und \emph{android:versionName} in Android-Manifest prüfen
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Release-APK}
+	\begin{itemize}
+		\item Signieren mit privatem Schlüssel\\
+			$\rightarrow$ Erzeugung mit \emph{Keytool}\\
+			$\rightarrow$ Signieren mit \emph{Jarsigner}
+		\item Überarbeitung des Pakets mit \emph{zipalign} (SDK-Werkzeuge)
+		\item Hochladen des *.apks über \emph{Publisher Konsole}
+		\item Einstellung von Vertriebsländern, Preisen
+		\item Erstellung von Dokumentation und Screenshots
+		\item Kategorisierung
+		\item Veröffentlichen
+	\end{itemize}
+	
+	\begin{alertblock}{Google-Prüfung}
+		Seit Kurzem werden alle neu in den Play Store hochgeladenen Pakete vor dem 
+		Vertrieb durch ein automatisiertes Google-Tool geprüft um 
+		Schadprogramme zu filtern.
+	\end{alertblock}
+\end{frame}
