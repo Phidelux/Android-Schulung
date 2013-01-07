@@ -531,14 +531,14 @@
    \begin{itemize}
    	\item Enthält nur Dateien der Applikation
    	\item Wird beim Deinstallieren gelöscht
-      \item \emph{getExternalFilesDir()} erwartet Typ des zu öffneden Verzeichnisses
+      \item \emph{getExternalFilesDir()} erwartet Typ des zu öffnenden Verzeichnisses
       \item Typ ist Datei abhängig, Beispiel \emph{Context.DIRECTORY\_MUSIC}
       \item Dateien können so von Android-Media-Scanner gefunden werden
       \item Android-Media-Scanner stellt Dateien anderen Applikationen zur Verfügung
-      \item \emph{getExternalFilesDir()} mit Parameter \emph{null}) liefert 
-      	Wurzelverzeichnis
       \item Datei \emph{.nomedia} im Wurzelverzeichnis verhindert Durchsuchen 
       	durch Android-Media-Scanner
+      \item \emph{getExternalFilesDir()} mit Parameter \emph{null} liefert 
+      	Wurzelverzeichnis
    \end{itemize}
 \end{frame}
 
@@ -548,7 +548,7 @@
    	\item Enthält öffentliche Dateien der Applikation
       \item Dateien sind für alle Applikationen les- und schreibbar
       \item Dateien bleiben auch nach Deinstallation gespeichert
-      \item \emph{getExternalFilesDir()} erwartet Typ des zu öffneden Verzeichnisses
+      \item \emph{getExternalStoragePublicDirectory()} erwartet Typ des zu öffneden Verzeichnisses
       \item Typ ist Datei abhängig, Beispiel \emph{Context.DIRECTORY\_MUSIC}
    \end{itemize}
 
@@ -640,10 +640,9 @@
    \frametitle{Anfragen absetzen}
    \begin{itemize}
    	\item Direktes Ausführen einer Anfrage mit \emph{execSQL()}
-   	\item Methoden \emph{insert()}, \emph{update()} und \emph{delete} 
+   	\item Methoden \emph{insert()}, \emph{update()} und \emph{delete()} 
    		zum Einfügen, Ändern und Löschen von Datensätzen
-   	\item \emph{query()} und \emph{rawQuery()} um Abfragen (\emph{Queries}) 
-			zu senden
+   	\item \emph{query()} und \emph{rawQuery()} um Abfragen zu senden
    	\item Ergebnisse von Anfragen werden als \emph{Cursor}-Objekte zurückgeliefert
    \end{itemize}
 \end{frame}
@@ -669,7 +668,7 @@
 \begin{frame}
    \frametitle{Implementierung}
 	\lstinputlisting[
-		caption=Den SQLiteDatabase nutzen,
+		caption=SQLiteDatabase nutzen,
 		label={lst:SQLiteDatabase.java}]{src/java/SQLiteDatabase.java}
 \end{frame}
 
@@ -698,7 +697,7 @@
    	\item Stellt anderen Applikationen einen oder mehrere Datenstämme (Tabellen)
    		zur Verfügung
    	\item Kontrolliert den Zugriff
-   	\item Beispiel: \emph{Dictonary Provider} \& \emph{Contact Provider}
+   	\item Beispiel: \emph{Dictionary Provider} \& \emph{Contact Provider}
    	\item Zugriff über \emph{ContentResolver}-Objekt
    	\item Daten werden über \emph{URI} identifiziert
    	\item \emph{URI} setzt sich aus symbolischen Namen des Providers und einer 
@@ -744,24 +743,28 @@
    \end{itemize}
 
 	\lstinputlisting[
-		caption=Anfrage an einen ContentProvider,
-		label={lst:dictionaryQuery.java}]{src/java/dictionaryQuery.java}
-
-	\lstinputlisting[
 		language=sql,caption=Die SQL-Abfrage,
 		label={lst:dictionarySql.sql}]{src/sql/dictionarySql.sql}
+\end{frame}
+
+\begin{frame}
+   \frametitle{Implementierung II}
+
+	\lstinputlisting[
+		caption=Anfrage an einen ContentProvider,
+		label={lst:dictionaryQuery.java}]{src/java/dictionaryQuery.java}
 \end{frame}
 
 \section{Datenverarbeitung}
 \begin{frame}
    \frametitle{Ergebnisse Durchlaufen}
 	\lstinputlisting[
-		caption=Manuelles durchlaufen des Cursors,
+		caption=Manuelles Durchlaufen des Cursors,
 		label={lst:dictionaryCursor.java}]{src/java/dictionaryCursor.java}
 \end{frame}
 
 \begin{frame}
-   \frametitle{Ergebnisse Anzeigen}
+   \frametitle{Anzeigen von Ergebnissen}
 	\lstinputlisting[
 		caption=Verwendung des SimpleCursorAdapters,
 		label={lst:dictionaryAdapter.java}]{src/java/dictionaryAdapter.java}
@@ -856,8 +859,8 @@
 	Entwickler-deklarierte Typen haben die Formen:
 	
    \begin{enumerate}
-   	\item vnd.android.cursor.item/\textless{}provider\textgreater/\textless{}table\textgreater
-   	\item vnd.android.cursor.dir/\textless{}provider\textgreater/\textless{}table\textgreater
+   	\item vnd.android.cursor.item/vnd.\textless{}provider\textgreater/\textless{}table\textgreater
+   	\item vnd.android.cursor.dir/vnd.\textless{}provider\textgreater/\textless{}table\textgreater
    \end{enumerate}
 \end{frame}
 
@@ -880,7 +883,7 @@
    	\item Eintrag mit \emph{\textless{}provider\textgreater}-Element
    	\item Deklaration der Zugriffsrechte mit \emph{\textless{}permission\textgreater}-Elemente
    	\item Erlauben eines temporären Zugriffs mit \emph{android:grantUriPermssions} \emph{true}
-   	\item Alternative gesteuerte Vergabe von temporärem Zugriff über 
+   	\item Alternative: Gesteuerte Vergabe von temporärem Zugriff über 
    		\emph{\textless{}grant-uri-permission\textgreater}
    \end{itemize}
    

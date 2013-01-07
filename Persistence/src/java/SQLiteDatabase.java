@@ -1,33 +1,26 @@
 try {
-	// Instance the SqliteDatabaseHelper object ...
+	// Instance the SqliteDatabaseHelper and fetch SQLite database handle.
 	UbuntuReleasesHelper dbHelper = new UbuntuReleasesHelper(this);
-
-	// ... and fetch the SQLite database handle.
 	SQLiteDatabase sqlite = dbHelper.getWritableDatabase();
 	
-	// Declare the sql statement ...
+	// Declare the sql statement and execute the query.
 	String sql = "SELECT * FROM releases;";
-
-	// ... and execute the query.
 	Cursor sqlCursor = this.sqlite.rawQuery(sql, null);
 
 	// Check if query has a result.
 	if(sqlCursor != null) {
 		// Try to move to the first entry.
 		if(sqlCursor.moveToFirst()) {
-			// Get the column indices, ...
+			// Get the column indices and loop over all results.
 			int nameIndex = sqlCursor.getColumnIndexOrThrow("name");
 			int versionIndex = sqlCursor.getColumnIndexOrThrow("version");
 			int releaseIndex = sqlCursor.getColumnIndexOrThrow("releasedAt");
-
-			// ... and loop over all results.
+			
 			do {
-				// Fetch the column values ...
+				// Fetch the column values and do something with them.
 				String name = sqlCursor.getString(nameIndex);
 				String version = sqlCursor.getString(versionIndex);
 				Long release = sqlCursor.getLong(releaseIndex);
-				
-				// ... and do something with them.
 			} while(sqlCursor.moveToNext());
 		}
 	}
