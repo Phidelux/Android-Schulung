@@ -1,0 +1,221 @@
+\PassOptionsToPackage{table}{xcolor}
+\documentclass{scrartcl}
+
+% Include all needed base libraries.
+\usepackage[ngerman]{babel} % we speak (new) german...:-)
+%\usepackage[latin1]{inputenc} % input encoding ISO 8859-1 (Latin-1)
+%\usepackage[latin9]{inputenc} % input encoding ISO 8859-15 (Latin-9) (includes euro symbol)
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc} % font encoding T1
+\usepackage{amssymb,amsmath}
+
+% Include more packages.
+\usepackage[left=3cm,right=3cm,top=2cm,bottom=2cm,includeheadfoot]{geometry}
+\usepackage{coordsys,logsys,color}
+\usepackage{multirow}
+\usepackage{xcolor}
+\usepackage{colortbl}
+
+% Define spacing between lines.
+\usepackage[onehalfspacing]{setspace}
+
+% Define some meta data.
+\title{Evaluation -- Android-Schulung}
+\author{Andreas Wilhelm}
+
+% Define colors for the title box.
+\definecolor{darkblue}{RGB}{59, 91, 134}
+\definecolor{fgcgray}{rgb}{0.4, 0.4, 0.4}
+\definecolor{bgctitle}{RGB}{59, 91, 134}
+\definecolor{fgctitle}{rgb}{0.99, 0.99, 0.95}
+
+% Declare some short font tags.
+\renewcommand{\familydefault}{cmss}
+\newcommand{\tfont}[1]{\textcolor{fgctitle}{\fontfamily{cmss}\fontseries{bx}\fontshape{n}\fontsize{20.48}{0pt} \selectfont #1}}
+\newcommand{\itfont}[1]{\textcolor{bgctitle}{\fontfamily{cmss}\fontseries{bx}\fontshape{n}\fontsize{13}{0pt} \selectfont #1}}
+
+% Redeclare the make title.
+\makeatletter
+\def\@maketitle{
+  \begin{center}
+    \colorbox{bgctitle}{
+      \parbox{\textwidth}{
+        \vskip 8pt
+        \centering{\tfont{\@title}}
+        \par
+        \vskip 8pt
+      }
+    }
+    \colorbox{white}{
+      \parbox{\textwidth}{
+        \vskip 8pt
+        \centering{\itfont{\@author}}
+        \par
+        \vskip 8pt
+      }
+    }
+  \end{center}
+  \vskip 2.5em
+}
+\makeatother
+
+% Disable ident after paragraph.
+\parindent 0pt
+
+% Include packages used for the questionnaire.
+\usepackage{wasysym}
+\usepackage{enumitem}
+\usepackage{color}
+\usepackage{forloop}
+\usepackage{ifthen}
+
+% Declare some new commands based on this packages.
+\newcommand{\Qq}[1]{\textbf{#1}}
+
+% \QO = Circle or box to be ticked.
+\newcommand{\QO}{$\Box$}
+
+% \Qrating = Automatically create a rating scale with NUM steps.
+\newcounter{qr}
+\newcommand{\Qrating}[1]{\QO\forloop{qr}{1}{\value{qr} < #1}{---\QO}}
+
+% \Qline = Again, this is very simple. It helps setting the line
+% thickness globally. Used both by direct call and by \Qlines.
+\newcommand{\Qline}[1]{\noindent\rule{#1}{0.6pt}}
+
+% \Qlines = Insert NUM lines with width=\linewith.
+\newcounter{ql}
+\newcommand{\Qlines}[1]{\forloop{ql}{0}{\value{ql}<#1}{\vskip0em\Qline{\linewidth}}}
+
+% \Qlist = This is an environment very similar to itemize.
+\newenvironment{Qlist}{%
+  \renewcommand{\labelitemi}{\QO}
+  \begin{itemize}[leftmargin=1.5em,topsep=-.5em]
+}{%
+  \end{itemize}
+}
+
+%% \Qtab = A "tabulator simulation".
+\newlength{\qt}
+\newcommand{\Qtab}[2]{
+  \setlength{\qt}{\linewidth}
+  \addtolength{\qt}{-#1}
+  \hfill\parbox[t]{\qt}{\raggedright #2}
+}
+
+%% \Qitem = Item with automatic numbering.
+\newcounter{itemnummer}
+\newcommand{\Qitem}[2][]{
+  \ifthenelse{\equal{#1}{}}{\stepcounter{itemnummer}}{}
+  \ifthenelse{\equal{#1}{a}}{\stepcounter{itemnummer}}{}
+  \begin{enumerate}[topsep=2pt,leftmargin=2.8em]
+  \item[\textbf{\arabic{itemnummer}#1.}] #2
+  \end{enumerate}
+}
+
+%% \QItem = Like \Qitem but with alternating background color.
+\definecolor{bgodd}{rgb}{0.8,0.8,0.8}
+\definecolor{bgeven}{rgb}{0.9,0.9,0.9}
+\newcounter{itemoddeven}
+\newlength{\gb}
+\newcommand{\QItem}[2][]{
+  \setlength{\gb}{\linewidth}
+  \addtolength{\gb}{-5.25pt}
+  \ifthenelse{\equal{\value{itemoddeven}}{0}}{%
+    \noindent\colorbox{bgeven}{\hskip-3pt\begin{minipage}{\gb}\Qitem[#1]{#2}\end{minipage}}%
+    \stepcounter{itemoddeven}%
+  }{%
+    \noindent\colorbox{bgodd}{\hskip-3pt\begin{minipage}{\gb}\Qitem[#1]{#2}\end{minipage}}%
+    \setcounter{itemoddeven}{0}%
+  }
+}
+
+% Begin the document.
+\begin{document}
+
+% Include the headline.
+\maketitle
+
+Um die Qualität und den Praxisbezug der Schulung überprüfen zu können, möchte 
+ich Sie bitten, sich einen kurzen Moment Zeit zu nehmen, um die folgenden 
+Fragen zu beantworten. Vielen Dank für Ihre aktive Mithilfe zur Verbesserung 
+dieser Schulung.\\
+
+\section{Teilnehmer}
+
+\Qq{Android-Erfahrung} \Qtab{6cm}{Profi \Qrating{5} Einsteiger}
+
+\vspace{5mm}
+
+\Qq{Java-Erfahrung} \Qtab{6cm}{Profi \Qrating{5} Einsteiger}
+
+\vskip 3em
+
+\section{Seminar}
+
+\Qq{Ihre Erwartungen} \Qtab{6cm}{positiv \Qrating{5} negativ}
+
+\vspace{5mm}
+
+\Qq{Gesamt-Eindruck} \Qtab{6cm}{hervorragend \Qrating{5} katastrophal}
+
+\vspace{5mm}
+
+\Qq{Inhalte} \Qtab{6cm}{ansprechend \Qrating{5} uninteressant}
+
+\vspace{5mm}
+
+\Qq{Gliederung} \Qtab{6cm}{sehr gut \Qrating{5} keine}
+
+\vspace{5mm}
+
+\Qq{Lehrunterlagen} \Qtab{6cm}{hilfreich \Qrating{5} nutzlos}
+
+\vspace{5mm}
+
+\Qq{Umfang} \Qtab{6cm}{zu viele Inhalte \Qrating{5} zu wenig Inhalte}
+
+\vspace{5mm}
+
+\Qq{Praxis \& Theorie} \Qtab{6cm}{zu praktisch \Qrating{5} zu theoretisch}
+
+\vspace{5mm}
+
+\Qq{Pausen} \Qtab{6cm}{zu lang \Qrating{5} zu kurz}
+
+\pagebreak
+
+\section{Trainer}
+
+\Qq{Fachwissen \& Kompetenz} \Qtab{6cm}{hohe Kompetenz \Qrating{5} keine Ahnung}
+
+\vspace{5mm}
+
+\Qq{Präsentation} \Qtab{6cm}{sehr gut \Qrating{5} mangelhaft}
+
+\vspace{5mm}
+
+\Qq{Sprache} \Qtab{6cm}{sehr gut \Qrating{5} mangelhaft}
+
+\vspace{5mm}
+
+\Qq{Teilnehmerorientierung} \Qtab{6cm}{sehr stark \Qrating{5} keine}
+
+\vskip 3em
+
+\section{Fazit}
+
+\textbf{Würden Sie dieses Seminar weiterempfehlen?}\\
+\hspace*{1cm}\QO{} Ja\hskip0.5cm \QO{} Nein
+
+\vspace{5mm}
+
+\textbf{Sind Fragen offen geblieben?}\\
+\hspace*{1cm}\QO{} Ja\hskip0.5cm \QO{} Nein
+
+\vskip 3em
+
+\section{Anregungen}
+\Qlines{5}
+	
+\end{document}
