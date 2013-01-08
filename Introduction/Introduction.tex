@@ -1,12 +1,10 @@
 \title{Android -- Eine Einführung}
 \subtitle{Entwicklungsumgebung, Aufbau, Komponenten \& Widgets}
 \author[A. Wilhelm]{Andreas Wilhelm}
-\institute[IfI -- Uni Göttingen]{
-   Institut für Informatik\\ Georg-August-Universität Göttingen
-}
+\institute[www.avedo.net]{}
 \titlegraphic{}
 %\date{\today}
-\date{www.avedo.net}
+\date{CSC Computer-Schulung \& Consulting GmbH}
 
 \begin{frame}[plain]
   \titlepage
@@ -440,7 +438,7 @@
    \end{itemize}
 \end{frame}
 
-\begin{frame}[label=intent_results]
+\begin{frame}
    \frametitle{Ergebnisse von Intents}
    
    \lstinputlisting[caption={Starten der Aktivität},
@@ -450,13 +448,13 @@
    	label={lst:result_intent.java}]{src/java/result_intent.java}
 \end{frame}
 
-\begin{frame}[label=intent_results]
+\begin{frame}
    \frametitle{Ergebnisse von Intents}
    \lstinputlisting[caption={Ergebnisse empfangen},
       label={lst:on_activity_result.java}]{src/java/on_activity_result.java}
 \end{frame}
 
-\begin{frame}[label=intent_filters]
+\begin{frame}
    \frametitle{Intent-Filter}
    \begin{itemize}
       \item Legen fest auf welche impliziten Intents eine Komponente anspricht
@@ -477,6 +475,7 @@
       \item Starten von Broadcasts und Aktivitäten 
       \item \emph{PendingIntent.getBroadcast()} bzw. \emph{PendingIntent.getActivity()} 
       \item Beispiel: Notification-Manager
+   \end{itemize}
 \end{frame}
 
 \begin{frame}
