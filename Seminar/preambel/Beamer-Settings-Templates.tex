@@ -1,0 +1,155 @@
+% *****************************************
+% >>>> 15.3.2    Using Beamer’s Templates
+% *****************************************
+
+\makeatletter
+\AtBeginPart{%
+  \addtocontents{toc}{\protect\beamer@partintoc{\the\c@part}{\beamer@partnameshort}{\the\c@page}}%
+}
+%% number, shortname, page.
+\providecommand\beamer@partintoc[3]{%
+  \ifnum\c@tocdepth=-1\relax
+    % requesting onlyparts.
+    \makebox[6em]{#1.} #2
+    \par
+  \fi
+}
+\define@key{beamertoc}{onlyparts}[]{%
+  \c@tocdepth=-1\relax
+}
+\makeatother%
+
+
+\makeatletter
+\setbeamercolor{secsubsec}{fg=white,bg=avedo}
+\setbeamertemplate{headline}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=\paperwidth,ht=2.5ex,dp=1ex]{secsubsec}%
+    \raggedright
+    \hspace*{2em}%
+    {\sffamily\scriptsize\insertpart\hfill\insertsection}%
+    \hspace*{2em}%
+  \end{beamercolorbox}%
+  }%
+}
+\makeatother
+
+\makeatletter
+\setbeamercolor{frametitle}{fg=avedo,bg=white}
+\setbeamertemplate{frametitle}
+{\leavevmode
+  \hbox{%
+  \begin{beamercolorbox}[wd=\paperwidth,ht=3.5ex,dp=0.7ex]{frametitle}%
+    \raggedright\hspace*{1.5em}\Large\insertframetitle
+  \end{beamercolorbox}
+  }%
+}
+\makeatother
+
+\makeatletter
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\insertshortauthor~~\beamer@ifempty{\insertshortinstitute}{}{(\insertshortinstitute)}
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{4em}
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+\makeatother
+
+\makeatletter
+\setbeamertemplate{part page}
+{
+  \begin{centering}
+    \vskip3em\par
+    \begin{beamercolorbox}[sep=16pt,center]{part title}
+      \usebeamerfont{part title}\insertpart\par
+    \end{beamercolorbox}
+  \end{centering}
+}
+\makeatother
+
+\renewenvironment{block}[1]{%
+  \begin{actionenv}%
+      \def\insertblocktitle{#1}%
+      \par%
+      \mode<presentation>{%
+        \setbeamercolor{block title}{fg=white,bg=avedo}
+       \setbeamercolor{block body}{fg=darkgray,bg=lightgray}
+       \setbeamercolor{itemize item}{fg=avedo}
+       \setbeamertemplate{itemize item}[triangle]
+       \setbeamercolor{enumerate item}{fg=avedo}
+       \setbeamertemplate{enumerate item}[square]
+     }%
+      \usebeamertemplate{block begin}}
+    {\par\usebeamertemplate{block end}\end{actionenv}}
+
+\renewenvironment{exampleblock}[1]{%
+  \begin{actionenv}%
+      \def\insertblocktitle{#1}%
+      \par%
+      \mode<presentation>{%
+        \setbeamercolor{block title}{fg=white,bg=avedo}
+       \setbeamercolor{block body}{fg=darkgray,bg=lightgray}
+       \setbeamercolor{itemize item}{fg=avedo}
+       \setbeamertemplate{itemize item}[triangle]
+       \setbeamercolor{enumerate item}{fg=avedo}
+       \setbeamertemplate{enumerate item}[square]
+     }%
+      \usebeamertemplate{block begin}}
+    {\par\usebeamertemplate{block end}\end{actionenv}}
+
+\renewenvironment{alertblock}[1]{%
+  \begin{actionenv}%
+      \def\insertblocktitle{#1}%
+      \par%
+      \mode<presentation>{%
+        \setbeamercolor{block title}{fg=white,bg=avedo}
+       \setbeamercolor{block body}{fg=darkgray,bg=lightgray}
+       \setbeamercolor{itemize item}{fg=avedo}
+       \setbeamertemplate{itemize item}[triangle]
+       \setbeamercolor{enumerate item}{fg=avedo}
+       \setbeamertemplate{enumerate item}[square]
+     }%
+      \usebeamertemplate{block begin}}
+    {\par\usebeamertemplate{block end}\end{actionenv}}
+
+\newenvironment{attrDesc}[1]{%
+   \vspace{0.3cm}
+   \small
+   \begin{center}
+      \setlength\arrayrulewidth{0.75pt}
+      \arrayrulecolor{white}
+      \renewcommand{\arraystretch}{1.3}
+      \rowcolors{1}{boxcol}{boxcol}
+      \begin{tabular}{#1}
+         \rowcolor{boxheadcol}
+         \rowstyle{\color{white}\bfseries\sffamily}
+}{   
+      \end{tabular}
+   \end{center}
+   \vspace{0.3cm}
+}
+
+\newcolumntype{+}{>{\global\let\currentrowstyle\relax}}
+\newcolumntype{^}{>{\currentrowstyle}}
+\newcommand{\rowstyle}[1]{\gdef\currentrowstyle{#1}%
+#1\ignorespaces
+}
+
+\setbeamertemplate{mini frames}[box] % shows small rectangles as mini frames.
+\setbeamertemplate{navigation symbols}{} % suppresses all navigation symbols:
+\setbeamersize{text margin left=2em,text margin right=2em}
+\setbeamertemplate{sections/subsections in toc}[square] 
+\setbeamertemplate{bibliography item}[default]
+\setbeamertemplate{itemize items}[triangle]
+\setbeamertemplate{enumerate items}[square]
