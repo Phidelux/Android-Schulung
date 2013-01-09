@@ -1,50 +1,18 @@
-public class EmailService extends Service {
-   private Looper mServiceLooper;
-   private ServiceHandler mServiceHandler;
+// Initialize the notification builder and assign the 
+// important notification data.
+Notification.Builder releaseBuilder = new Notification.Builder(this)
+	.setSmallIcon(R.drawable.ubuntu)
+	.setContentTitle("New Ubuntu Release")
+	.setContentText("Ubuntu 12.10 - Quantal Quetzal released!");
 
-   @Override
-   public void onCreate() {
-      HandlerThread thread = new HandlerThread("ServiceStartArguments",1);
-      thread.start();
-      mServiceLooper = thread.getLooper();
-      mServiceHandler = new ServiceHandler(mServiceLooper);
-   }
+// Create an explicit intent to start the Ubuntu Release List activity.
+Intent ubuntuIntent = new Intent(this, HelloList.class);
 
-   // Handler that receives messages from the thread
-   private final class ServiceHandler extends Handler {
-      public ServiceHandler(Looper looper) {
-         super(looper);
-      }
+// Setup the pending intent to start the Ubuntu Release List activity.
+PendingIntent pendingIntent = PendingIntent.getActivity(
+		this, 0, ubuntuIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+releaseBuilder.setContentIntent(pendingIntent);
 
-      @Override
-      public void handleMessage(Message msg) {
-         // Do your operations.         
-
-         // Fetch an instance of the notification manager.
-         NotificationManager nm = (NotificationManager) context.getSystemService(
-            Context.NOTIFICATION_SERVICE
-         );
-
-         // Initialize an intent to launch the email list ...
-         Intent emailListIntent = new Intent(context, EmailList.class);
-
-         // ... and get PendingIntent to launch the activity if user selects the notification.
-         PendingIntent pIntent = PendingIntent.getActivity(context, null,
-            emailListIntent, PendingIntent.FLAG_CANCEL_CURRENT);
-
-         // Construct the Notification object, ...
-         Notification notif = new Notification(R.drawable.icon, R.string.newEmails,
-            System.currentTimeMillis());
-
-         // ... set the notification sound and light ...
-         notif.defaults |= Notification.DEFAULT_SOUND | Notification.DEFAULT_VIBRATE;
-         notif.flags |= Notification.FLAG_SHOW_LIGHTS | Notification.FLAG_AUTO_CANCEL
-                  | Notification.FLAG_ONLY_ALERT_ONCE;
-
-         // ... and finally fire the notification
-         nm.notify(R.string.incomingMessageTickerText, notif);
-      }
-   }
-
-   ...
-}
+// Get the notification manager and show the notification.
+NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+notificationManager.notify(RELEASE_NOTIFICATION, releaseBuilder.build());

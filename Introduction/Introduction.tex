@@ -266,7 +266,7 @@
       \item Implementiert werden sollten \emph{onCreate()}, 
 			\emph{onCreateView()} und \emph{onPause()}
       \item Wichtig: Änderungen sollten in \emph{onPause()} gespeichert werden, 
-      	denn es ist nicht sicher ob benutzer zurückkehrt
+      	denn es ist nicht sicher ob Benutzer zurückkehrt
       \item Einbettung des Fragments in Layout der Aktivität über 
       	\emph{\textless{}fragment\textgreater}
       \item Alternativ Integration über Vater-ViewGroup des Fragments 
@@ -280,7 +280,7 @@
 		wobei die ID der ViewGroup verwendet wird.\\
    \end{alertblock}
    
-   \begin{alertblock}{Backstack}
+   \begin{alertblock}{Umrüstung}
 		Die großen Ähnlichkeiten im Aufbau von Fragmenten und Aktivitäten, macht es 
 		zumeist sehr einfach eine Applikation auf Fragmente umzurüsten. 
 		Oftmals reicht es den Quellcode aus einer Methode der Aktivität in die 
@@ -466,7 +466,7 @@
 		language=xml,label={lst:intent_filter.xml}]{src/xml/intent_filter.xml}
 \end{frame}
 
-\subsection{Pending Intent}
+\section{Pending Intent}
 \begin{frame}
    \frametitle{Allgemeines}
    \begin{itemize}
