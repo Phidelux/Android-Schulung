@@ -69,8 +69,9 @@
 
 % 2 Aufbau einer Applikation
 % 2.1 Das Manifest
-% 2.2 Resourcen
-% 2.3 Aktivitäten und Layouts
+% 2.2 Ressource
+% 2.3 Activities und Layouts
+% 2.4 Context
 \part{Aufbau einer Applikation}
 \frame{\partpage}
 \begin{frame}
@@ -84,7 +85,7 @@
    Enthält grundlegende Informationen über eine Applikation wie
    \begin{itemize}
       \item Name, Paketname und Version der Applikation
-      \item Verwendete Komponenten (Aktivitäten, Services und Broadcast Receiver)
+      \item Verwendete Komponenten (Activities, Services und BroadcastReceiver)
       \item Zugangsmöglichkeiten zu den einzelnen Komponenten (Broadcasts, ...)
       \item Zugriffsrechte der Applikation (Internet, Anrufe, ...)
       \item Benötigte Zugriffsrechte anderer Applikationen zur Verwendung 
@@ -101,35 +102,59 @@
 \end{frame}
 
 \section{Ressourcenverwaltung}
-\begin{frame}[label=resources]
+\begin{frame}
    \frametitle{Überblick}
    \begin{itemize}
-      \item Trennung von Quellcode und Resourcen (Bildern, Zeichenketten, Layouts, ...)
+      \item Trennung von Quellcode und Ressourcen (Bildern, Zeichenketten, Layouts, ...)
       \item Eröffnet Möglichkeit verschiedenste Geräte zu unterstützen
-      \item Verwaltung der Resourcen in Verzeichnisstruktur unter \emph{res}
-      \item Feste Konventionen zur Einsortierung von Resourcen 
+      \item Verwaltung der Ressourcen in Verzeichnisstruktur unter \emph{res}
+      \item Feste Konventionen zur Einsortierung von Ressourcen 
          (Beispiel: \emph{res/values/strings.xml} und \emph{res/values-de/strings.xml})
-      \item Zugriff auf Resourcen aus dem Quellcode über automatisch generierte Klasse \emph{R}
-      \item Referenzierung der Resourcen über IDs (Beispiel: \emph{R.string.btnOk})
+      \item Zugriff auf Ressourcen aus dem Quellcode über automatisch generierte Klasse \emph{R}
+      \item Referenzierung der Ressourcen über IDs (Beispiel: \emph{R.string.btnOk})
    \end{itemize}
 
    \lstinputlisting[language=xml,label={lst:strings.xml},
-      caption={String Resourcen}]{src/xml/strings.xml}
+      caption={String Ressourcen}]{src/xml/strings.xml}
 \end{frame}
 
-\begin{frame}[label=resources]
+\begin{frame}
    \frametitle{Beispiele}
 
    \lstinputlisting[language=xml,label={lst:colors.xml},
-      caption={Farb Resourcen}]{src/xml/colors.xml}
+      caption={Farb Ressourcen}]{src/xml/colors.xml}
    
    \lstinputlisting[label={lst:resources.java},
-   	caption={Zugriff auf Resourcen}]{src/java/resources.java}
+   	caption={Zugriff auf Ressourcen}]{src/java/resources.java}
+\end{frame}
+
+\section{Context}
+\begin{frame}
+   \frametitle{Überblick}
+   \begin{itemize}
+      \item Globale Schnittstelle, die Zugriff auf wichtige Informationen der 
+      	Applikation bzw. ihrer Umgebung ermöglicht
+      \item Klasse \emph{Context} ist abstrakt
+      \item Zugriff auf Ressourcen
+      \item Auslösen von Systemaufrufen
+      \item Verbindung zwischen Komponenten und System
+      \item Wichtige Methoden \emph{getSharedPreferences()}, \emph{getResources()}, 
+      	\emph{startActivity()}, \emph{startService()} und \emph{sendBroadcast()}
+   \end{itemize}
+\end{frame}
+
+\begin{frame}
+   \frametitle{Implementierung}
+   \begin{itemize}
+      \item \emph{ContextWrapper} abgeleitet von \emph{Context}
+      \item \emph{ContextThemeWrapper} abgeleitet von \emph{ContextWrapper}
+      \item \emph{Activity} abgeleitet von \emph{ContextThemeWrapper}
+   \end{itemize}
 \end{frame}
 
 % 3 Komponenten in Android
-% 3.1 Aktivitäten
-% 3.2 Fragmente
+% 3.1 Activities
+% 3.2 Fragments
 % 3.3 Views und View-Groups
 % 3.4 Intents
 % 3.4.1 Explizite Intents
@@ -138,8 +163,8 @@
 % 3.4.4 Intent-Filter
 % 3.4.5 PendingIntents
 % 3.5 Services
-% 3.6 Content-Provider
-% 3.7 Broadcast-Receiver
+% 3.6 ContentProvider
+% 3.7 BroadcastReceiver
 \part{Komponenten in Android}
 \frame{\partpage}
 \begin{frame}
@@ -147,37 +172,37 @@
 	\tableofcontents[]
 \end{frame}
 
-\section{Aktivitäten}
+\section{Activities}
 \begin{frame}[label=activities]
    \frametitle{Allgemeines}
    \begin{itemize}
-      \item Aktivitäten (Activities) bilden die Präsentationsschicht einer Applikation
-      \item Eine Applikation kann aus mehreren Aktivitäten (Dialoge oder Seiten) bestehen
-      \item Implementierung einer Aktivität durch Ableitung einer Kindklasse von \emph{Activity}
+      \item Activities bilden die Präsentationsschicht einer Applikation
+      \item Eine Applikation kann aus mehreren Activities (Dialoge oder Seiten) bestehen
+      \item Implementierung einer Activity durch Ableitung einer Kindklasse von \emph{Activity}
       \item Wichtig: Überschreiben der Methode \emph{onCreate(Bundle)}
       \item Zuweisung der grafischen Oberfläche mittels der Methode \emph{setContentView(View)}
    \end{itemize}
 
    \lstinputlisting[label={lst:activity.java},
-   	caption={Basisimplementation einer Aktivität}]{src/java/activity.java}
+   	caption={Basisimplementation einer Activity}]{src/java/activity.java}
 \end{frame}
 
 \begin{frame}[label=activities_states]
    \frametitle{Lebenszyklus}
    Neben \emph{onCreate()} gibt es weitere Callback-Methoden, die auf 
-   Zustandsänderungen der Aktivität reagieren. Man spricht vom \emph{Activity Lifecycle}.\\
+   Zustandsänderungen der Activity reagieren. Man spricht vom \emph{Activity Lifecycle}.\\
 
    Aus der Stack basierten Struktur des Systems ergeben sich folgende Zustände 
-   für eine Aktivität:
+   für eine Activity:
 
    \begin{description}
-      \item[Running] Aktuell im Vordergrund befindliche Aktivität
-      \item[Paused] Sichtbare, aber nicht mehr im Fokus befindliche Aktivität --
-         Aktivität bleibt aktiv und der WindowManager hat weiterhin Zugriff -- 
-         Aktivität kann trotzdem bei Resourcenmangel vom System beendet werden
-      \item[Stopped] Nicht sichtbare Aktivitäten -- alle Einstellungen und 
+      \item[Running] Aktuell im Vordergrund befindliche Activity
+      \item[Paused] Sichtbare, aber nicht mehr im Fokus befindliche Activity --
+         Activity bleibt aktiv und der WindowManager hat weiterhin Zugriff -- 
+         Activity kann trotzdem bei Ressourcenmangel vom System beendet werden
+      \item[Stopped] Nicht sichtbare Activities -- alle Einstellungen und 
          Zustände gespeichert -- werden häufig vom System beendet
-      \item[Finished] Vom System beendete Aktivität -- muss neu gestartet 
+      \item[Finished] Vom System beendete Activity -- muss neu gestartet 
          werden und die Einstellungen der letzten Sitzung neu geladen werden, 
          falls sie erneut den Fokus bekommt
    \end{description}
@@ -189,7 +214,7 @@
      \centering
      \includegraphics[width=0.45\textwidth]{pictures/activity_lifecycle.eps}
      \caption{
-        Der Aktivity Lifecycle 
+        Der Activity Lifecycle 
         (\emph{Quelle: 
            \href{http://developer.android.com}{http://developer.android.com}})
      }
@@ -197,28 +222,28 @@
    \end{figure}
 \end{frame}
 
-\section{Fragmente}
+\section{Fragments}
 \begin{frame}[label=fragments]
    \frametitle{Allgemeines}
    \begin{itemize}
-      \item Teil einer Aktivität -- Eine Aktivität kann meherere Fragments enthalten
+      \item Teil einer Activity -- Eine Activity kann meherere Fragments enthalten
       \item Eingeführt in Android Version 3.0 (API-Version 11)
       \item Flexiblere grafische Oberflächen für größere Displays
       \item Einfacheres Austauschen und Wiederverwerten von Teilen der Oberfläche
-      \item Verhalten ähnlich einer Aktivität -- Lebenszyklen eng verbunden\\
-      	$\rightarrow$ Sollte Aktivität beendet werden, werden alle beinhalteten 
-      		Fragmente beendet
+      \item Verhalten ähnlich einer Activity -- Lebenszyklen eng verbunden\\
+      	$\rightarrow$ Sollte Activity beendet werden, werden alle beinhalteten 
+      		Fragments beendet
    \end{itemize}
    
-   Zustände eines Fragments ähneln denen einer Aktivität:
+   Zustände eines Fragments ähneln denen einer Activity:
 
 	\begin{description}
-		\item[Laufend] Das Fragment ist sichtbar innerhalb der aktiven Aktivität. 
-		\item[Pausiert] Die beinhaltende Aktivität ist zwar zumindest teilweise sichtbar, 
+		\item[Laufend] Das Fragment ist sichtbar innerhalb der aktiven Activity. 
+		\item[Pausiert] Die beinhaltende Activity ist zwar zumindest teilweise sichtbar, 
 			läuft aber im Hintergrund.
-		\item[Gestoppt] Entweder die beinhaltende Aktivität wurde beendet oder 
+		\item[Gestoppt] Entweder die beinhaltende Activity wurde beendet oder 
 			das Fragment wurde entfernt und auf dem ''Zurück''-Stapel (\emph{Backstack})
-			der Aktivität abgelegt. Das Fragment ist jedoch, auch wenn nicht sichtbar, 
+			der Activity abgelegt. Das Fragment ist jedoch, auch wenn nicht sichtbar, 
 			immernoch aktiv.
 	\end{description}
 \end{frame}
@@ -227,20 +252,20 @@
    \frametitle{Lebenszyklus}
    
    \begin{alertblock}{Backstack}
-		Android unterscheidet zwischen System- und Aktivitäten-Backstack. Aktivitäten 
-		werden automatisch auf den System-Backstack, Fragmente nur nach expliziter 
-		Aufforderung auf Aktivitäten-Backstack abgelegt. 
+		Android unterscheidet zwischen System- und Activity-Backstack. Activities 
+		werden automatisch auf den System-Backstack, Fragments nur nach expliziter 
+		Aufforderung auf Activity-Backstack abgelegt. 
    \end{alertblock}
    
-   Neben von Aktivitäten bekannten Methoden, wie \emph{onCreate()}, \emph{onPause()} 
-	und \emph{onResume()} implementieren Fragmente weitere Methoden zur Synchronisation:
+   Neben von Activities bekannten Methoden, wie \emph{onCreate()}, \emph{onPause()} 
+	und \emph{onResume()} implementieren Fragments weitere Methoden zur Synchronisation:
 
 	\begin{description}
-		\item[onAttach()] Fragment wird mit Aktivität assoziiert
+		\item[onAttach()] Fragment wird mit Activity assoziiert
 		\item[onCreateView()] Layout des Fragments soll erstellt bzw. geladen werden
-		\item[onActivityCreated()] Aufruf der Methode \emph{onCreate()} der Aktivität wurde beendet
+		\item[onActivityCreated()] Aufruf der Methode \emph{onCreate()} der Activity wurde beendet
 		\item[onDestroyView()] Ansicht wird aufgelöst
-		\item[onDetach()] Assoziation zwischen Fragment und Aktivität wurde aufgehoben
+		\item[onDetach()] Assoziation zwischen Fragment und Activity wurde aufgehoben
 	\end{description}
 \end{frame}
 
@@ -267,7 +292,7 @@
 			\emph{onCreateView()} und \emph{onPause()}
       \item Wichtig: Änderungen sollten in \emph{onPause()} gespeichert werden, 
       	denn es ist nicht sicher ob Benutzer zurückkehrt
-      \item Einbettung des Fragments in Layout der Aktivität über 
+      \item Einbettung des Fragments in Layout der Activity über 
       	\emph{\textless{}fragment\textgreater}
       \item Alternativ Integration über Vater-ViewGroup des Fragments 
       	im Quellcode
@@ -281,9 +306,9 @@
    \end{alertblock}
    
    \begin{alertblock}{Umrüstung}
-		Die großen Ähnlichkeiten im Aufbau von Fragmenten und Aktivitäten, macht es 
-		zumeist sehr einfach eine Applikation auf Fragmente umzurüsten. 
-		Oftmals reicht es den Quellcode aus einer Methode der Aktivität in die 
+		Die großen Ähnlichkeiten im Aufbau von Fragments und Activities, macht es 
+		zumeist sehr einfach eine Applikation auf Fragments umzurüsten. 
+		Oftmals reicht es den Quellcode aus einer Methode der Activity in die 
 		entsprechende Methode des Fragments zu verschieben.
    \end{alertblock}
 \end{frame}
@@ -302,12 +327,12 @@
 \end{frame}
 
 \begin{frame}[label=fragment_transactions]
-   \frametitle{Transaktionen}
+   \frametitle{Transactions}
    \begin{itemize}
-      \item Hinzufügen, Ersetzen und Löschen von Fragments in Aktivität
+      \item Hinzufügen, Ersetzen und Löschen von Fragments in Activity
       \item Verarbeitung von \emph{FragmentTransaction} mit \emph{FragmentManager}
-      \item Aktivitäten-Backstack verwaltet Fragment-Transaktionen
-      \item Einbinden des Fragments in Layout der Aktivität über \emph{\textless{}fragment\textgreater}
+      \item Activity-Backstack verwaltet FragmentTransactions
+      \item Einbinden des Fragments in Layout der Activity über \emph{\textless{}fragment\textgreater}
       \item Alternativ Integration über Vater-ViewGroup des Fragments
       \item Mehrere Fragments zu Navigationszwecken
       \item Problem: Unterscheidung für große und kleine Displays nötig
@@ -315,25 +340,25 @@
 \end{frame}
 
 \begin{frame}[label=fragment_transactions]
-   \frametitle{Transaktionen im Einsatz}
+   \frametitle{Transactions im Einsatz}
 	\lstinputlisting[caption=Eine FragmentTransaction,
 		label={lst:fragmentTransaction.java}]{src/java/fragmentTransaction.java}
 \end{frame}
 
 \begin{frame}[label=activity_layout]
-   \frametitle{Aktivitäten-Lösung}
+   \frametitle{Activity-Lösung}
 	\begin{figure}[h!]
 	  \centering
-	  \subfigure[Erste Aktivität mit Liste]{
+	  \subfigure[Erste Activity mit Liste]{
 		  \includegraphics[width=0.47\textwidth]{pictures/ubuntu_list_rows.eps}
 		  \label{fig:ubuntu_list_rows}
 	  }\hfill
-	  \subfigure[Zweite Aktivität mit Zusatzinformationen]{
+	  \subfigure[Zweite Activity mit Zusatzinformationen]{
 		  \includegraphics[width=0.47\textwidth]{pictures/ubuntu_list_rows_empty.eps}
 		  \label{fig:ubuntu_list_rows_empty}
 	  }
 	  \caption{
-		  Navigation mit zwei Aktivitäten
+		  Navigation mit zwei Activities
 	  }
 	  \label{fig:ubuntu_activity_list}
 	\end{figure}
@@ -354,16 +379,16 @@
 \begin{frame}[label=fragments_without_layout]
    \frametitle{Fragments ohne Layout}
    \begin{itemize}
-      \item Fragmente ohne Layout als Erweiterungen von Aktivitäten
+      \item Fragments ohne Layout als Erweiterungen von Activities
       \item Implementierung von Hintergrundarbeiten
       \item Implementierung von oft verwendeten Menüs
-      \item Zuweisung von Fragmenten ohne Layout mit \emph{add()}
+      \item Zuweisung von Fragments ohne Layout mit \emph{add()}
       \item Laden dieser Fragments mit \emph{findFragmentByTag()}
       \item \emph{onCreateView()} wird nicht aufgerufen
    \end{itemize}
 \end{frame}
 
-\section{Views und View-Groups}
+\section{Views und ViewGroups}
 \begin{frame}[label=views]
    \frametitle{Allgemeines}
    \begin{itemize}
@@ -402,8 +427,8 @@
       \item Nachrichten zur Kommunikation innerhalb des Systems
       \item Aufruf von Funktionalitäten des Systems
       \item Übertragung von Daten zwischen verschiedenen Komponenten
-      \item Methoden \emph{startActivity} und \emph{startService}, sowie 
-         \emph{sendBroadcast} nutzen Intents
+      \item Methoden \emph{startActivity()} und \emph{startService()}, sowie 
+         \emph{sendBroadcast()} nutzen Intents
       \item Unterscheidung zwischen expliziten und impliziten Intents
    \end{itemize}
 \end{frame}
@@ -412,7 +437,7 @@
    \frametitle{Explizite Intents}
    Der Empfänger der Nachricht wird explizit angegeben.
 
-   \lstinputlisting[caption={Starten einer Aktivität},
+   \lstinputlisting[caption={Starten einer Activity},
 		label={lst:explicit_intent.java}]{src/java/explicit_intent.java}
    
    Die übertragenden Daten können in der \emph{onCreate()} Methode extrahiert 
@@ -441,7 +466,7 @@
 \begin{frame}
    \frametitle{Ergebnisse von Intents}
    
-   \lstinputlisting[caption={Starten der Aktivität},
+   \lstinputlisting[caption={Starten der Activity},
    	label={lst:start_for_result.java}]{src/java/start_for_result.java}
 
    \lstinputlisting[caption={Ergebnisse senden},
@@ -466,21 +491,21 @@
 		language=xml,label={lst:intent_filter.xml}]{src/xml/intent_filter.xml}
 \end{frame}
 
-\section{Pending Intent}
+\section{PendingIntent}
 \begin{frame}
    \frametitle{Allgemeines}
    \begin{itemize}
       \item PendingIntents kapseln ein Intent und die zur Verwendung benötigten Rechte
       \item Delegation von Rechten an andere Applikationen bzw. das System
-      \item Starten von Broadcasts und Aktivitäten 
+      \item Starten von Broadcasts und Activities 
       \item \emph{PendingIntent.getBroadcast()} bzw. \emph{PendingIntent.getActivity()} 
-      \item Beispiel: Notification-Manager
+      \item Beispiel: NotificationManager
    \end{itemize}
 \end{frame}
 
 \begin{frame}
    \frametitle{Beispiel}
-	\lstinputlisting[caption=Email Benachrichtigung,label={lst:email_notification.java}]{src/java/email_notification.java}
+	\lstinputlisting[caption=Benachrichtigung,label={lst:email_notification.java}]{src/java/email_notification.java}
 \end{frame}
 
 \section{Services}
@@ -521,9 +546,9 @@
    	label={lst:service.java}]{src/java/service.java}
 \end{frame}
 
-\section{Content-Provider}
+\section{ContentProvider}
 \begin{frame}[label=content_provider]
-   \frametitle{Content-Provider}
+   \frametitle{ContentProvider}
    \begin{itemize}
       \item Verwalten den Zugriff auf Daten und stellen diese global zur Verfügung
       \item Kapseln die Daten und bieten Mechanismen zum Datenschutz
@@ -536,9 +561,9 @@
    \end{itemize}
 \end{frame}
 
-\section{Broadcast-Receiver}
+\section{BroadcastReceiver}
 \begin{frame}[label=broadcast_receiver]
-   \frametitle{Broadcast-Receiver}
+   \frametitle{BroadcastReceiver}
    \begin{itemize}
       \item Empfänger von Intents die mit \emph{sendBroadcast()} versendet wurden
       \item Kommunikation zwischen verschiedenen Komponenten
@@ -585,7 +610,7 @@
       \label{fig:widget}
    \end{figure}
 
-   Optional kann auch eine gesonderte Aktivität zur Konfiguration des 
+   Optional kann auch eine gesonderte Activity zur Konfiguration des 
    Widgets hinterlegt werden.
 \end{frame}
 
@@ -671,7 +696,7 @@
          andere Endgeräte
       \item Neue Komponenten für die Erstellung von Benutzeroberflächen (NumberPicker, ...)
       \item Verbesserte Unterstützung größerer Displays
-      \item Einfacher Zugriff auf Kontakte, Profildaten, Kalender Einträge 
+      \item Einfacher Zugriff auf Kontakte, Profildaten, Kalender-Einträge 
          und soziale Netzwerke
       \item Verbesserte Multimedia API (Neue Codecs, erweitertes Streaming, ...)
       \item Verbesserung der Hardware-Anforderungen (Hardware beschleunigte 2D-Darstellung)

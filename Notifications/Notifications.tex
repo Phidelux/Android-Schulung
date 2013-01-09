@@ -62,7 +62,7 @@
    \end{itemize}
 
    \lstinputlisting[
-      language=xml,caption=Das Toast layout,
+      language=xml,caption=Das Toast Layout,
       label={lst:toast_layout.xml}]{src/xml/toast_layout.xml}
 \end{frame}
 
@@ -207,7 +207,7 @@
       \item Zuweisung von Icons oder Sounds
       \item Zuweisung einer Aktion immer sinnvoll
       \item Aktion wird als PendingIntent an \emph{setContentIntent()} übergeben
-      \item PendingIntent erlaubt anderer Applikation eine Aktivität zu starten
+      \item PendingIntent erlaubt anderer Applikation eine Activity zu starten
    \end{itemize}
 
    \lstinputlisting[
@@ -227,7 +227,7 @@
 
    \begin{alertblock}{NotificationCompat.Builder}
       Seit API-Level 11 (Android Version 3.0) bietet Android die Klasse 
-      \emph{TaskStackBuilder}, die sich um die Verwaltung des Back-Stacks 
+      \emph{TaskStackBuilder}, die sich um die Verwaltung des Backstacks 
       bei der Navaigation kümmert. Die Navigation mit Hilfe des \emph{Zurück}-Buttons 
       ist nur innerhalb einer Applikation festgelegt, aber nicht der Wechsel zwischen 
       Applikationen.
@@ -238,7 +238,7 @@
       zu älteren Versionen von Android. So wird seit Android 3.0 beim Aufruf von 
       \emph{startActivities()} oder \emph{getPendingIntent(int, int)} ein 
       seperater Back-Stack angelegt, während in älteren Versionen nur die oberste 
-      Aktivität des übergebenen Stacks ausgeführt und so die Navigation zur aufrufenden 
+      Activity des übergebenen Stacks ausgeführt und so die Navigation zur aufrufenden 
       Applikation ermöglicht wird.
    \end{alertblock}
 \end{frame}
@@ -382,6 +382,6 @@
       \emph{NotificationCompat.Builder} zugewiesen. Dabei sollten 
       Hintergundbilder vermieden werden, da sonst die Schrift unlesbar werden könnte. 
       Außerdem sollte auf komplexe Layouts verzichtet werden. Der Einsatz von 
-      System-Resourcen ist sehr zu empfehlen.
+      System-Ressourcen ist sehr zu empfehlen.
    \end{alertblock}
 \end{frame}

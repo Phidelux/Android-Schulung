@@ -27,7 +27,7 @@
 \begin{frame}
    \frametitle{Allgemeines}
    \begin{itemize}
-      \item Oberflächen für Aktivitäten, Menüs, Dialoge und Widgets
+      \item Oberflächen für Activities, Menüs, Dialoge und Widgets
       \item Grundelemente Views und ViewGroups (Layouts \& AdapterViews)
       \item Deklaration im XML-Format
       \item Formatierung eines Elements über Attribute
@@ -75,7 +75,7 @@
       
       \vspace{3mm}
 
-      Alternativ kann eine ID als Resource deklariert und mit \emph{@id/name} 
+      Alternativ kann eine ID als Ressource deklariert und mit \emph{@id/name} 
       referenziert werden. Die XML-Deklaration kann unter einem beliebigen 
       Dateinamen in \emph{/res/values} abgelegt werden.\\
 
@@ -90,7 +90,7 @@
    \begin{itemize}
       \item Bemaßungen eines ViewGroups mit den Attributen \emph{android:layout\_width} 
 			und \emph{android:layout\_height} entweder explizit oder implizit
-      \item Explizite Angabe erfolgt dabei als Wert (px, dp, sp, pt, in, mm) oder als Resource
+      \item Explizite Angabe erfolgt dabei als Wert (px, dp, sp, pt, in, mm) oder als Ressource
       \item Implizite über die Schlüsselwörter \emph{fill\_parent}, 
          \emph{match\_parent} oder \emph{wrap\_content}
    \end{itemize}
@@ -104,7 +104,7 @@
       \emph{wrap\_content} & Sorgt für Anpassung der Größe, sodass Inhalt umschlossen wird\\
   	\end{attrDesc}
 
-   Alternativ kann man auch eine Resource im Quellcode über die Klasse \emph{R} 
+   Alternativ kann man auch eine Ressource im Quellcode über die Klasse \emph{R} 
    oder in einer XMl-Datei mit dem Schlüssel \emph{@[package:]dimen/dimension\_name} 
    referenzieren.\\
 
@@ -229,7 +229,7 @@
 		android:hint & Text der angezeigt werden soll, wenn das Eingabefeld leer ist\\
 		android:lines & Höhe des Eingabefeldes in Zeilen\\
 		android:maxLength & Maximale Länge der Eingabe\\
-		android:password & Erlaubt das verstecken des eingegeben Texts 
+		android:password & Erlaubt das Verstecken des eingegeben Texts 
 		   und deaktiviert die Autovervollständigung [boolean] \\
 		android:textColorHint & Farbe des Stanard-Textes [color] \\
 	\end{attrDesc}
@@ -265,7 +265,7 @@
 	\begin{attrDesc}{+p{4cm}|^p{6cm}}
 		Attribut & Beschreibung\\
 		\hline
-		android:onClick & Definiert eine Methode der Aktivität, die beim 
+		android:onClick & Definiert eine Methode der Activity, die beim 
 			klicken auf den Button ausgeführt werden soll\\
 	\end{attrDesc}
 \end{frame}
@@ -436,7 +436,7 @@
       \item Abgeleitet von TextView
       \item Implementiert das Checkable Interface
       \item Kennt Zustände aktiviert (\emph{checked}) und deaktiviert (\emph{unchecked})
-      \item Einsatz sinnvoll mit Spinnern und ListViews, wenn \emph{setChoiceMode()} 
+      \item Einsatz sinnvoll mit Spinner und ListView, wenn \emph{setChoiceMode()} 
       	auf \emph{CHOICE\_MODE\_NONE} gesetzt
    \end{itemize}
    
@@ -476,7 +476,7 @@
 		android:cropToPadding & Legt fest ob ein Bild zugeschnitten werden soll 
 		   um in seinen Bereich zu passen [boolean]\\
 		android:baselineAlignBottom & Legt fest ob das Bild an der Grundlinie basierend 
-		   auf der unteren kante ausgerichtet wird [boolean]\\
+		   auf der unteren Kante ausgerichtet wird [boolean]\\
 		android:baseline & Legt die Grundlinie des Bildes fest [flag]\\ 
 		android:maxHeight & Maximale Höhe [dimension]\\
 		android:maxWidth & Maximale Breite [dimension]\\
@@ -550,7 +550,7 @@
 \begin{frame}
    \frametitle{Allgemeines}
    \begin{itemize}
-      \item Visualisierung des Fortschritts eines laufenden Prozesses
+      \item Visualisierung des Fortschritts einer laufenden Operation
       \item Unterscheidung in nicht deterministisch und deterministisch
       \item Möglichkeit einen zweiten Ladebalken anzuzeigen (Bsp. Buffering)
    \end{itemize}
@@ -652,7 +652,7 @@
 \begin{frame}
    \frametitle{Anmerkung}
 	\begin{alertblock}{String-Arrays}
-		Auswahllisten, wie Spinner, können mit String-Array-Resourcen befüllt und 
+		Auswahllisten, wie Spinner, können mit String-Array-Ressourcen befüllt und 
 		sprachunabhängig gestaltet werden. Deklaration in der Sprachdatei 
 		\emph{string.xml} unter \emph{/res/values}. 
 
@@ -681,7 +681,7 @@
       Attribut & Beschreibung\\
       \hline
       android:format & String der ein Ausgabeformat festlegt. Das erste Vorkommen 
-         von \emph{\%s} wird durch den aktuellen wert des Timers im Format 
+         von \emph{\%s} wird durch den aktuellen Wert des Timers im Format 
          \emph{MM:SS} oder \emph{H:MM:SS} ersetzt.\\
    \end{attrDesc}
 \end{frame}
@@ -714,7 +714,7 @@
    \begin{itemize}
       \item Ermöglicht Anzeige von Webseiten innerhalb einer Applikation
       \item Abgeleitet von der Klasse \emph{ViewGroups} oder genauer von \emph{AbsolutLayout}
-      \item Anzeigen der Webinhalte übernimmt die \emph{WebKit} Engine
+      \item Anzeigen der Webinhalte übernimmt die \emph{WebKit}-Engine
       \item Unterstützt nicht von Haus aus Web typische Besonderheiten, wie JavaScript
       \item Inhalte mit \emph{loadUrl()} oder HTML-Code mit \emph{loadData()} laden
    \end{itemize}
@@ -728,7 +728,7 @@
       \vspace{3mm}
 
       \lstinputlisting[
-         backgroundcolor=\color{boxcol},language=xml,caption=Internet Zugriffsrechte,
+         backgroundcolor=\color{boxcol},language=xml,caption=Internet-Zugriffsrechte,
          label={lst:internet_permissions.xml}]{src/xml/internet_permissions.xml} 
    \end{alertblock}
 \end{frame}
@@ -974,7 +974,7 @@
    \frametitle{Allgemeines}
    \begin{itemize}
       \item Platziert Inhalte in einer Tabellenstruktur
-      \item Zeilen werden explizit angegeben, Spalten implizit angenommen werden
+      \item Zeilen werden explizit angegeben, Spalten implizit angenommen
    \end{itemize}
 
    \begin{attrDesc}{+p{4cm}|^p{6cm}}
@@ -1024,7 +1024,7 @@
 		da sich dies bereits selbst um das Scrollen seiner Elemente kümmert. 
 		Sollte man dies dennoch tun, zwingt man das ListView dazu sich auf die benötigte 
 		Länge auszudehnen um alle Elemente anzeigen zu können. Die in ListView 
-		implementierten Optimierungen zur Anzeige großer Listen würden somit umgangen werden.
+		implementierten Optimierungen zur Anzeige großer Listen würden somit umgangen.
    \end{alertblock}
 
    \begin{alertblock}{Horizontales Scrollen}
@@ -1071,7 +1071,7 @@
    \frametitle{ListView}
    \begin{itemize}
       \item Scrollbare Liste von Einträgen
-      \item Nutzt spezielle Aktivität ListActivity
+      \item Nutzt spezielle Activity -- ListActivity
       \item ListActivity nutzt automatisch ein Standard-Layout
       \item Eigenes Layout kann mit \emph{setContentView()} gesetzt werden
       \item Liste muss ID \emph{@android:id/list} tragen
@@ -1099,16 +1099,16 @@
 \end{frame}
 
 \begin{frame}
-   \frametitle{Resourcen}
+   \frametitle{Ressourcen}
 
-   \begin{alertblock}{Array-Resourcen}
-      Wie Zeichenketten, Bemaßungen und Styles können auch Arrays als Resourcen 
+   \begin{alertblock}{Array-Ressourcen}
+      Wie Zeichenketten, Bemaßungen und Styles können auch Arrays als Ressourcen 
       hinterlegt werden.
 
       \vspace{3mm}
 
       Arrays werden wie gewohnt in XML deklariert. Als Werte des Arrays können 
-      praktisch beliebige Resource-Typen, wie Strings, Integer oder Drawables dienen. 
+      praktisch beliebige Ressource-Typen, wie Strings, Integer oder Drawables dienen. 
       Dabei können die Typen vermischt werden. Die entstehende Datei kann unter 
       \emph{res/values/arrays.xml} abgelegt werden.
 
@@ -1116,12 +1116,12 @@
 
       \lstinputlisting[
          backgroundcolor=\color{boxcol},language=xml,
-         caption=Array Resourcen,label={lst:array_resources.xml}]{src/xml/array_resources.xml} 
+         caption=Array-Ressourcen,label={lst:array_resources.xml}]{src/xml/array_resources.xml} 
    \end{alertblock}
 \end{frame}
 
 \begin{frame}
-   \frametitle{Resourcen}
+   \frametitle{Ressourcen}
 
    \begin{alertblock}{Android-Layouts}
 		Beim Betrachten der Klasse HelloList sollte auffallen, dass ein Layout 

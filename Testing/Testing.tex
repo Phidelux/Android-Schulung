@@ -38,7 +38,7 @@
 		\item Eigenes Android-Projekt mit Test-Paketen und -Klassen
 		\item Eine Klasse implementiert die Tests eines Moduls
 		\item Eine Klassen-Methode einen Test
-		\item Android lädt Test- und das Applikations-Paket mit Test-Runner
+		\item Android lädt Test- und das Applikations-Paket mit TestRunner
 	\end{itemize}
 \end{frame}
 
@@ -46,7 +46,7 @@
 	\frametitle{Test-Projekt Erstellen}
 	\begin{itemize}
 		\item Einbindung der SDK-Test-Tools über Eclipse ADT-Plugin
-		\item Erstellen des Projekt-, Source- und Resource-Verzeichnisses
+		\item Erstellen des Projekt-, Quellcode- und Ressourcen-Verzeichnisses
 		\item Anlegen eines Test-Pakets mit Suffix \emph{.test}
 		\item Generieren des Android-Manifests und der ANT-Dateien
 		\item Eintragung des \emph{InstrumentationTestRunner} im Manifest
@@ -73,8 +73,8 @@
 		\item Einflussnahme auf Lebenszyklus einer Applikation wichtig
 		\item Android Klasse \emph{Instrumentation}
 		\item Simulieren das beispielsweise Starten (\emph{onCreate()}) 
-			oder Beenden (\emph{onDestroy}) einer Aktivität
-		\item Beispielanwendung: Prüfung des gespeicherten Zustands einer Aktivität
+			oder Beenden (\emph{onDestroy}) einer Activity
+		\item Beispielanwendung: Prüfung des gespeicherten Zustands einer Activity
 		\item Spezialisierte Klassen, wie \emph{ActivityInstrumentationTestCase2}
 	\end{itemize}
 	
@@ -95,7 +95,7 @@
 \begin{frame}
 	\frametitle{Anmerkungen}
 	\begin{itemize}
-		\item Test-Paket und Aktivität werden nicht im selben Thread geladen
+		\item Test-Paket und Activity werden nicht im selben Thread geladen
 		\item Zugriff auf grafische Oberfläche mit \emph{runOnUiThread()}
 		\item Alternative: Annotation \emph{@UiThreadTest}
 	\end{itemize}
@@ -113,7 +113,7 @@
 \begin{frame}
 	\frametitle{Anmerkungen}
 	\begin{itemize}
-		\item Bibliotheken für das Testen von Aktivitäten, Services und ContentProvider
+		\item Bibliotheken für das Testen von Activities, Services und ContentProvider
 		\item Vor- und Nachbereitung der Tests (\emph{setUp()} und \emph{tearDown()})
 		\item Mock-Objekte als Platzhalter für echte Objekte
 	\end{itemize}
@@ -304,7 +304,7 @@
 		\item Prüfen ob der Paketname aussagekräftig ist (kann nicht mehr geändert werden)
 		\item Entfernen des \emph{android:debuggable}-Attibuts aus dem Android-Manifest
 		\item Entfernen aller Debug- und Log-Ausgaben
-		\item Sicherstellen, dass keine Test-Resourcen (beispielsweise Test-Server) 
+		\item Sicherstellen, dass keine Test-Ressourcen (beispielsweise Test-Server) 
 			mehr verwendet werden
 		\item Verzeichnis-Struktur des Projekts bereinigen -- Jedes Verzeichnis sollte nur die 
 			für es vorgesehenen Dateien enthalten

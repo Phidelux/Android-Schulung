@@ -38,7 +38,7 @@
 
    \begin{alertblock}{PreferenceActivity}
       Bis Android 3.0 wurden Einstellungen über eine von \emph{PreferenceActivity} 
-      abgeleitete Aktivität angezeigt. Seit Android 3.0 verwendet man 
+      abgeleitete Activity angezeigt. Seit Android 3.0 verwendet man 
       vorzugsweise \emph{PreferenceFragments}.
    \end{alertblock}
 
@@ -68,7 +68,7 @@
    \begin{attrDesc}{+p{4cm}|^p{6cm}}
       Klasse & Beschreibung\\
       \hline
-      \emph{CheckBoxPreference} & Checkbox-Eintrag - Einstellungen mit boolschem Wert\\
+      \emph{CheckBoxPreference} & Checkbox-Eintrag -- Einstellungen mit boolschem Wert\\
       \emph{EditTextPreference} & Einstellungen als Text\\
       \emph{ListPreference} & Auswahlliste mit nur einer wählbaren Option\\
       \emph{MultiSelectListPreference} & Auswahlliste mit mehreren wählbaren Optionen\\
@@ -136,8 +136,8 @@
       \emph{android:action} & Die Aktion, die das Intent auslösen soll\\
       \emph{android:data} & Daten, die über das Intent weitergegeben werden sollen\\
       \emph{android:mimeType} & Der zu verwendende MIME Typ\\
-      \emph{android:targetClass} & Der Name der Zielklasse (der Aktivität)\\
-      \emph{android:targetPackage} & Der Paket der Zielklasse (der Aktivität)\\
+      \emph{android:targetClass} & Der Name der Zielklasse (der Activity)\\
+      \emph{android:targetPackage} & Der Paket der Zielklasse (der Activity)\\
    \end{attrDesc}
 \end{frame}
 
@@ -168,7 +168,7 @@
 \end{frame}
 
 
-\section{Preference Aktivitäten \& Fragmente}
+\section{PreferenceActivity \& -Fragment}
 \begin{frame}
    \frametitle{PreferenceActivity}
    \begin{itemize}
@@ -210,7 +210,7 @@
       \item Setzen von Standard-Werten für \emph{SharedPreferences}
       \item Zuweisung über Attribut \emph{android:defaultValue}
       \item Initialisierung mit \emph{setDefaultValues()} in allen \emph{onCreate()} 
-      	Methoden von Aktivitäten, die als Einstiegspunkte dienen
+      	Methoden von Activities, die als Einstiegspunkte dienen
    \end{itemize}
 
    \lstinputlisting[
@@ -462,10 +462,10 @@
 		caption=Eine interne Datei lesen,
 		label={lst:readInternalStorage.java}]{src/java/readInternalStorage.java}
 
-	\begin{alertblock}{Statische Text-Resourcen}
+	\begin{alertblock}{Statische Text-Ressourcen}
 		Größere Texte, wie eine Dokumentation oder Hilfe, können 
-		als Resourcen hinterlegt werden. Dazu können beliebige Dateien im Ordner 
-		\emph{res/raw/} gespeichert und mit \emph{Ressources.openRawResource()}, 
+		als Ressourcen hinterlegt werden. Dazu können beliebige Dateien im Ordner 
+		\emph{res/raw/} gespeichert und mit \emph{Resources.openRawResource()}, 
 		unter Angabe der ID \emph{R.raw.\textless{}filename\textgreater}, geladen werden.
 	\end{alertblock}
 \end{frame}
@@ -695,7 +695,7 @@
    	\item Stellt anderen Applikationen einen oder mehrere Datenstämme (Tabellen)
    		zur Verfügung
    	\item Kontrolliert den Zugriff
-   	\item Beispiel: \emph{Dictionary Provider} \& \emph{Contact Provider}
+   	\item Beispiel: \emph{DictionaryProvider} \& \emph{ContactProvider}
    	\item Zugriff über \emph{ContentResolver}-Objekt
    	\item Daten werden über \emph{URI} identifiziert
    	\item \emph{URI} setzt sich aus symbolischen Namen des Providers und einer 

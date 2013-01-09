@@ -52,7 +52,7 @@
       \item Erlaubt Aktionen auf den selektierten Inhalten
       \item Beispielsweise Editieren eines Inhalts
       \item In Android 3.0 wurde dieses Menü teilweise durch den sogenannten 
-         \emph{Contextual Action Mode} abgelöst
+         \emph{ContextualActionMode} abgelöst
    \end{itemize}
 \end{frame}
 
@@ -83,8 +83,8 @@
       android:icon & Icon des Menüeintrags\\
       android:title & Titel des Menüeintrags\\
       android:showAsAction & Anzeigeverhalten in der ActionBar\\
-      android:orderInCategory & Beeinflussung der Reihenfolge der menüeinträge 
-      	(Aktivitäten \& Fragmente)
+      android:orderInCategory & Beeinflussung der Reihenfolge der Menüeinträge 
+      	(Activities \& Fragments)
    \end{attrDesc}
 \end{frame}
 
@@ -119,7 +119,7 @@
 
 \begin{frame}
    \frametitle{Beispiel}
-   \lstinputlisting[language=xml,caption=Die menü Deklaration,label={lst:ubuntu_optionsmenu.xml}]{src/xml/ubuntu_optionsmenu.xml}
+   \lstinputlisting[language=xml,caption=Die Menü Deklaration,label={lst:ubuntu_optionsmenu.xml}]{src/xml/ubuntu_optionsmenu.xml}
 \end{frame}
 
 \section{Optionsmenü}
@@ -188,21 +188,21 @@
 \begin{frame}
    \frametitle{Implementierung}
    \begin{itemize}
-      \item Optionsmenüs können in Aktivitäten oder Fragmenten eingebunden werden
+      \item Optionsmenüs können in Activities oder Fragments eingebunden werden
       \item Überschreiben der Methode \emph{onCreateOptionsMenu()}
       \item Seit Android 3.0 wird die Methode nicht mehr beim ersten 
-         Verwenden des Menüs aufgerufen, sondern eim Starten der Aktivität bzw. des Fragments
+         Verwenden des Menüs aufgerufen, sondern eim Starten der Activity bzw. des Fragments
       \item Menüs können mit Hilfe des \emph{MenuInflaters} geladen werden
       \item \emph{Menu}-Objekt ermöglicht hinzufügen von Einträgen 
          mit \emph{add()} und Laden von Einträgen mit \emph{findItem()}
    \end{itemize}
 
    \begin{alertblock}{Reihenfolge von Menüeinträgen}
-      Aktivitäten und Fragmente können Optionsmenüs implementieren.
+      Activities und Fragments können Optionsmenüs implementieren.
       Sollten beide ein Optionsmenü einbinden, so werden 
       diese von Android zusammengeführt und in einem gemeinsamen Menü angezeigt. 
-      Einträge des durch die Aktivität spezifizierten Menüs vor den Einträgen 
-      des oder der Fragmente. Reihenfolge der Einträge kann in den 
+      Einträge des durch die Activity spezifizierten Menüs vor den Einträgen 
+      des oder der Fragments. Reihenfolge der Einträge kann in den 
       \emph{\textless{}item\textgreater}-Elementen mit dem Attribut 
       \emph{android:orderInCategory} beeinflusst werden.
    \end{alertblock}
@@ -242,10 +242,10 @@
    \frametitle{Aktualisierung}
    \begin{itemize}
       \item Initialisierung eines Menüs findet in \emph{onCreateOptionsMenu()} statt
-      \item Aufruf nur beim starten der Aktivität bzw. des Fragments
+      \item Aufruf nur beim starten der Activity bzw. des Fragments
       \item Dynamische Änderungen der Menüstruktur können in der Methode 
          \emph{onPrepareOptionsMenu} vorgenommen werden
-      \item Methode kann in Aktivitäten und Fragmenten implementiert werden
+      \item Methode kann in Activities und Fragments implementiert werden
       \item Bekommt im Gegensatz zu \emph{onCreateOptionsMenu()} den 
          aktuellen Zustand des Menüs übergeben
    \end{itemize}
@@ -261,9 +261,9 @@
    \frametitle{Hinweise zur Implementierung}
 
    \begin{alertblock}{Abarbeitung von Events}
-      Sollten sowohl eine Aktivität und Fragmente ein Menü implementiert worden sein, 
-      wird erst die \emph{onOptionsItemSelected()} Methode der Aktivität und dann erst 
-      die der Fragmente nacheinander aufgerufen bis \emph{true} oder \emph{false} 
+      Sollten sowohl eine Activity und Fragment ein Menü implementiert worden sein, 
+      wird erst die \emph{onOptionsItemSelected()} Methode der Activity und dann erst 
+      die der Fragment nacheinander aufgerufen bis \emph{true} oder \emph{false} 
       zurückgegeben wird.
    \end{alertblock}
    
@@ -297,7 +297,7 @@
       	ActionBar geöffnet werden
       \item Views können sich für Kontextmenü mit \emph{registerForContextMenu()} registrieren
       \item Initialisierung des Menüs in \emph{onCreateContextMenu()}, die in 
-         Aktivitäten und Fragementen implementiert werden kann
+         Activities und Fragements implementiert werden kann
       \item Unterscheidung verschiedener Kontextmenüs anhand der \emph{ContextMenu.ContextMenuInfo}
    \end{itemize}
 \end{frame}
@@ -317,11 +317,11 @@
    \lstinputlisting[caption=Kontextmenü Events,label={lst:oncontextitemselected.java}]{src/java/oncontextitemselected.java}
 \end{frame}
 
-\section{Konext-ActionMode}
+\section{ContextualActionMode}
 \begin{frame}
    \frametitle{Allgemeines}
    \begin{itemize}
-      \item Konext-ActionMode ist der in Android 3.0 hinzugekommene Modus für Kontextmenüs
+      \item ContextualActionMode ist der in Android 3.0 hinzugekommene Modus für Kontextmenüs
       \item Zeigt anstatt eines Overflow-Menüs eine eigene ActionBar an
       \item Es können mehrere Einträge für eine Aktion ausgewählt werden
       \item Typisches Beispiel sind Aktionen auf Elementen einer Liste
@@ -420,14 +420,14 @@
    \begin{itemize}
       \item Eingeführt in Android 3.0
       \item Bieten häufig genutzte Aktionen und globale Navigation
-      \item Anzeige des Applikationsicons \& Titel der Aktivität
+      \item Anzeige des Applikationsicons \& Titel der Activity
       \item Navigation über Applikationsicon möglich
       \item Button am rechten Rand öffnet Overflow-Menü (Optionsmenü)
       \item Tab oder Spinner basierte Navigation und Filterung von Daten
-      \item Einbinden eigener Views als \emph{Action Views}
-      \item Seit Android 3.0 standardmäßig in allen Aktivitäten mit Theme \emph{Theme.Holo}
+      \item Einbinden eigener Views als \emph{ActionViews}
+      \item Seit Android 3.0 standardmäßig in allen Activities mit Theme \emph{Theme.Holo}
       \item Ausblendung der ActionBar mit \emph{@android:style/Theme.Holo.NoActionBar} 
-         in Deklaration der Aktivität
+         in Deklaration der Activity
    \end{itemize}
 
    \begin{alertblock}{ActionBars in älteren Android-Versionen}
@@ -438,15 +438,15 @@
 \end{frame}
 
 \begin{frame}
-   \frametitle{Action Items}
+   \frametitle{ActionItems}
    \begin{itemize}
       \item Einträge direkt in ActionBar
-      \item Optionsmenü-Einträge als Action Items (\emph{android:showAsAction})
+      \item Optionsmenü-Einträge als ActionItems (\emph{android:showAsAction})
       \item Anzeige des Icons und/oder Titels des Menüeintrags
       \item Standardmäßig nur Icons in ActionBar $\rightarrow$ \emph{android:withText}
    \end{itemize}
 
-   \lstinputlisting[language=xml,caption=Aktionen in der Actionbar,label={lst:show_as_action.xml}]{src/xml/show_as_action.xml}
+   \lstinputlisting[language=xml,caption=Aktionen in der ActionBar,label={lst:show_as_action.xml}]{src/xml/show_as_action.xml}
 \end{frame}
 
 \begin{frame}
@@ -456,13 +456,13 @@
       \item Verarbeitung der Menüauswahl in \emph{onOptionsItemSelected()}
       \item Seit Android 4.0 können mit \emph{android:uiOptions=splitActionBarWhenNarrow} 
       	ActionBars geteilt werden
-      \item Ausblenden des Titels der Aktivität mit \emph{setDisplayShowTitleEnabled(false)}
+      \item Ausblenden des Titels der Activity mit \emph{setDisplayShowTitleEnabled(false)}
       \item Ausblenden des Icons mit \emph{setDisplayShowHomeEnabled(false)}
    \end{itemize}
 
    \begin{alertblock}{Hinweis zu \emph{onOptionsItemSelected()}}
-      Das System ruft die Methode \emph{onOptionsItemSelected} der aktuellen Aktivität 
-      vor der entsprechenden Methode eventuell verwendeter Fragmente auf.
+      Das System ruft die Methode \emph{onOptionsItemSelected} der aktuellen Activity 
+      vor der entsprechenden Methode eventuell verwendeter Fragments auf.
    \end{alertblock}
 
    \begin{alertblock}{Neue Attribute in älteren Versionen}
@@ -481,18 +481,18 @@
       \item Verwendung als ActionItem zur Navigation möglich
       \item Bei Klick Aufruf von \emph{onOptionsItemSelected()}
       \item Identifikation über ID \emph{android.R.id.home}
-      \item Üblich sind Navigation zur Start-Aktivität oder durch 
+      \item Üblich sind Navigation zur Start-Activity oder durch 
          Applikationshierarchie (Aufsteigen)
    \end{itemize}
 
    \begin{alertblock}{Wichtiges Intent-Flag}
       Da beim Zurückkehren zur Startansicht eigentlich nichts anderes gemacht werden soll, 
-      als mehrere Aktivitäten zu schließen, sollte man immer das Flag 
+      als mehrere Activities zu schließen, sollte man immer das Flag 
       \emph{FLAG\_ACTIVITY\_CLEAR\_TOP} bei der Deklaration des Intents setzen.
    \end{alertblock}
 
    \begin{alertblock}{Aktivierung des Navigationsmodus}
-      Seit Android 4.0 muss das Applikationsicon explizit als Action Item 
+      Seit Android 4.0 muss das Applikationsicon explizit als ActionItem 
       mit Hilfe der Methode \emph{setHomeButtonEnabled(true)} angegeben werden.
    \end{alertblock}
 \end{frame}
@@ -512,17 +512,17 @@
 \end{frame}
 
 \begin{frame}
-   \frametitle{Action Views}
+   \frametitle{ActionViews}
    \begin{itemize}
       \item Fast beliebige Views in einer ActionBar
       \item Typische Anwendung Suchfelder \& Auswahllisten
       \item Einbinden mit \emph{android:actionViewClass} 
          oder \emph{android:actionLayout} in \emph{\textless{}item\textgreater}-Element
-      \item Zusammenklappen zu Action Item möglich (\emph{collapseActionView})
+      \item Zusammenklappen zu ActionItem möglich (\emph{collapseActionView})
    \end{itemize}
 
    \lstinputlisting[
-      language=xml,caption={Action View Deklaration},
+      language=xml,caption={ActionView Deklaration},
       label={lst:action_view.xml}]{src/xml/action_view.xml}
 \end{frame}
 
@@ -530,10 +530,10 @@
    \frametitle{Screenshot}
    \begin{figure}[h!]
      \centering
-     \subfigure[Action View zusammengeklappt]{\includegraphics[width=0.49\textwidth]{pictures/action_view.ps}}\hfill
-     \subfigure[Action View ausgeklappt]{\includegraphics[width=0.49\textwidth]{pictures/action_view_expanded.ps}}
+     \subfigure[ActionView zusammengeklappt]{\includegraphics[width=0.49\textwidth]{pictures/action_view.ps}}\hfill
+     \subfigure[ActionView ausgeklappt]{\includegraphics[width=0.49\textwidth]{pictures/action_view_expanded.ps}}
      \caption{
-        Anwendung von Action Views
+        Anwendung von ActionViews
      }
      \label{fig:action_view}
    \end{figure}
@@ -548,27 +548,27 @@
    \end{itemize}
 
    \lstinputlisting[
-      caption=Laden des Action Views,
+      caption=Laden des ActionViews,
       label={lst:load_action_view.java}]{src/java/load_action_view.java}
 \end{frame}
 
 \begin{frame}
    \frametitle{Hinweise}
 
-   \begin{alertblock}{Der Hardware-Such-button}
+   \begin{alertblock}{Der Hardware-Suchbutton}
       Manche Android-Geräte haben einen speziellen Hardware-Button, der die Suche öffnet. 
-      Das Überschreiben der Methode \emph{onKeyUp()} der betreffenden Aktivität 
+      Das Überschreiben der Methode \emph{onKeyUp()} der betreffenden Activity 
       ermöglicht das Behandeln des Events mit der ID \emph{KEYCODE\_SEARCH}.
    \end{alertblock}
    
-   \begin{alertblock}{Zusammenklappen von Action Views}
-      Das Zusammenklappen eines Aktion Views kann, falls dies nötig ist, 
+   \begin{alertblock}{Zusammenklappen von ActionViews}
+      Das Zusammenklappen eines ActionViews kann, falls dies nötig ist, 
       mit einem \emph{OnActionExpandListener} abgefangen und behandelt wereden.
    \end{alertblock}
 \end{frame}
 
 \begin{frame}
-   \frametitle{Action-Provider}
+   \frametitle{ActionProvider}
    \begin{itemize}
       \item Bindet eigenes View mit spezieller Event-Behandlung ein
       \item Typische Anwendung anbieten verschiedener Applikationen zum ''\emph{sharen}'' 
@@ -613,7 +613,7 @@
    \begin{alertblock}{Aktivierung des Navigationsmodus}
       Ein Bug sorgt manchmal dafür, dass auch wenn eine einzelne Anwendung 
       installiert ist, die dieses Intent verarbeiten könnte, der Button des dazugehörigen 
-      Action Providers im Emulator inaktiv ist. Dieses Problem lässt sich durch installieren 
+      ActionProviders im Emulator inaktiv ist. Dieses Problem lässt sich durch installieren 
       weiterer Programme mit der \emph{Android Debug Bridge} (adb) einfach beheben.
    \end{alertblock}
 \end{frame}
@@ -642,7 +642,7 @@
       \item Inhalte von Tabs werden als Fragment bereitgestellt
       \item Wechsel zwischen Tabs nutzt \emph{FragmentTransaction}
       \item Platzierung der Fragments in ViewGroup oder Standard-Layout
-      \item Fragment muss gesamte Aktivität (ausgenommen ActionBar) füllen
+      \item Fragment muss gesamte Activity (ausgenommen ActionBar) füllen
    \end{itemize}
 \end{frame}
 
@@ -690,10 +690,10 @@
    \frametitle{Screenshot}
    \begin{figure}[h!]
      \centering
-     \subfigure[Action Spinner]{\includegraphics[width=0.49\textwidth]{pictures/action_spinner.ps}}\hfill
-     \subfigure[Action Spinner ausgeklappt]{\includegraphics[width=0.49\textwidth]{pictures/action_spinner_expanded.ps}}
+     \subfigure[ActionSpinner]{\includegraphics[width=0.49\textwidth]{pictures/action_spinner.ps}}\hfill
+     \subfigure[ActionSpinner ausgeklappt]{\includegraphics[width=0.49\textwidth]{pictures/action_spinner_expanded.ps}}
      \caption{
-        Anwendung von Action Spinner
+        Anwendung von ActionSpinner
      }
      \label{fig:action_spinner}
    \end{figure}
