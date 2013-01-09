@@ -3,7 +3,7 @@ Android-Schulung
 
 Folien für die Android-Schulung
 
-Ablauf
+Inhalt
 ------
 
 1. Die Entwicklungsumgebung
@@ -63,3 +63,29 @@ Ablauf
 	3. Basis-Komponenten & Erweiterungen
 	4. Tests Ausführen
 12. Google Play
+
+Ablauf
+------
+
+Erster Tag
+
+* Einführung (2h)
+* Pause (15min)
+* Eine erste Applikation (1h)
+* Pause (30min)
+* Layouts (2h)
+* Pause (15min)
+* Erstellen einer Liste (1h)
+   
+Zweiter Tag
+
+* Menüs (1h)
+* Pause (15min)
+* Persistenz (2h)
+* Pause (30min)
+* Einbinden von Einstellungen (1h)
+* Pause (15min)
+* Threads (1h)
+* Pause (15min)
+* Testen (1h)
+   \end{enumerate}
