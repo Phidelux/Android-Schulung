@@ -1,8 +1,6 @@
 <manifest>
    <uses-permission />
-   <permission />
    <uses-sdk />
-   <supports-screens />  
    <compatible-screens />
 
    <application>
